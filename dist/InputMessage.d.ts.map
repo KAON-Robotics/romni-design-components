@@ -1,0 +1,1 @@
+{"version":3,"file":"InputMessage.d.ts","sourceRoot":"","sources":["../src/InputMessage.tsx"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,SAAS,EAAE,MAAM,OAAO,CAAC;AAevC,MAAM,WAAW,iBAAiB;IAChC,GAAG,EAAE,SAAS,CAAC;IACf,KAAK,CAAC,EAAE,MAAM,GAAG,OAAO,CAAC;CAC1B;AAED,eAAO,MAAM,iBAAiB,mBAA8B,iBAAiB,gCAI5E,CAAC;AAEF,eAAO,MAAM,mBAAmB,mBAA8B,iBAAiB,gCAI9E,CAAC"}

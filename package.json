@@ -18,8 +18,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "node --test test/*.test.mjs",
-    "check": "pnpm run build && pnpm run test",
-    "prepare": "pnpm run build"
+    "check": "pnpm run build && pnpm run test"
   },
   "engines": {
     "node": ">=18",

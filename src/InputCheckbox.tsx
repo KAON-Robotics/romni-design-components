@@ -1,5 +1,11 @@
 import { styled } from "@mui/material";
-import { useEffect, useState, type ChangeEventHandler, type ReactNode } from "react";
+import {
+  useEffect,
+  useState,
+  type ChangeEventHandler,
+  type LabelHTMLAttributes,
+  type ReactNode,
+} from "react";
 
 const Label = styled("label")({
   display: "flex",
@@ -18,7 +24,7 @@ const Label = styled("label")({
   },
 });
 
-const Check = styled("span", {
+const Check = styled("div", {
   shouldForwardProp: (prop) => prop !== "$checked" && prop !== "$disabled",
 })<{ $checked: boolean; $disabled: boolean }>(({ $checked, $disabled }) => ({
   position: "relative",
@@ -61,7 +67,8 @@ const HiddenInput = styled("input")({
   whiteSpace: "nowrap",
 });
 
-export interface InputCheckboxProps {
+export interface InputCheckboxProps
+  extends Omit<LabelHTMLAttributes<HTMLLabelElement>, "onChange"> {
   label?: ReactNode;
   value?: string | number;
   isChecked?: boolean;
@@ -75,6 +82,9 @@ export const InputCheckbox = ({
   isChecked = false,
   readOnly = false,
   onChange,
+  className,
+  onClick,
+  ...props
 }: InputCheckboxProps) => {
   const [checked, setChecked] = useState(isChecked);
 
@@ -82,9 +92,13 @@ export const InputCheckbox = ({
 
   return (
     <Label
-      className={readOnly ? "disabled" : undefined}
+      className={`${className ?? ""}${readOnly ? " disabled" : ""}`.trim() || undefined}
       data-stop-row-click="true"
-      onClick={(event) => event.stopPropagation()}
+      {...props}
+      onClick={(event) => {
+        event.stopPropagation();
+        onClick?.(event);
+      }}
     >
       <Check
         className={`input-checkbox${readOnly ? " disabled" : ""}${checked ? " checked" : ""}`}

@@ -1,12 +1,12 @@
 import { styled } from "@mui/material";
 
 const labels: Record<string, string> = {
-  "": "미설정",
   administrator: "시스템 관리자",
   manager: "관리자",
   executive: "경영진",
   staff: "운영자",
   guest: "게스트",
+  system: "테스트용",
 };
 
 const Badge = styled("span", {

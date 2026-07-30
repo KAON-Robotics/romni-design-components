@@ -1,0 +1,46 @@
+{
+  "name": "@romni/design-components",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "node --test test/*.test.mjs",
+    "check": "pnpm run build && pnpm run test",
+    "prepare": "pnpm run build"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "peerDependencies": {
+    "@emotion/react": ">=11 <12",
+    "@emotion/styled": ">=11 <12",
+    "@mui/material": ">=5 <6",
+    "react": ">=18 <19",
+    "react-dom": ">=18 <19"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^5.8.3",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "~5.4.3"
+  },
+  "packageManager": "pnpm@10.32.1"
+}

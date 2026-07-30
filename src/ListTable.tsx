@@ -1,21 +1,23 @@
 import { styled } from "@mui/material";
-import React, { type Key, type ReactNode, useEffect, useState } from "react";
+import React, { type Key, type ReactNode, useEffect, useRef, useState } from "react";
 import { InputCheckbox } from "./InputCheckbox.js";
 import { Pagination } from "./Pagination.js";
 import { TableLoadingOverlay } from "./TableLoadingOverlay.js";
 
-const Container = styled("div")({
+const Container = styled("div", {
+  shouldForwardProp: (prop) => prop !== "$empty",
+})<{ $empty: boolean }>(({ $empty }) => ({
   position: "relative",
   width: "100%",
-  padding: "12px 0 0",
-  overflow: "hidden",
+  minHeight: $empty ? "560px" : undefined,
+  padding: "12px 0 52px",
   border: "1px solid #EBEBEB",
   borderRadius: "12px",
   background: "#FFF",
-});
+}));
 
 const ScrollContainer = styled("div")({
-  width: "100%",
+  height: "100%",
   overflowX: "auto",
   borderBottom: "1px solid #E0E0E0",
   "&::-webkit-scrollbar": { height: "8px" },
@@ -34,7 +36,6 @@ const ScrollContainer = styled("div")({
 const Table = styled("table")({
   width: "max-content",
   minWidth: "100%",
-  borderCollapse: "collapse",
   fontSize: "12px",
 });
 
@@ -48,34 +49,56 @@ const Head = styled("thead", {
 }));
 
 const HeaderCell = styled("th")({
+  position: "relative",
   height: "44px",
-  padding: "0 20px",
+  paddingLeft: "16px",
   color: "#7C8694",
   fontSize: "12px",
   fontWeight: 600,
   textAlign: "left",
   verticalAlign: "middle",
-  whiteSpace: "nowrap",
+  cursor: "default",
+  ".header-content": {
+    display: "inline-flex",
+    padding: "2px 4px",
+    marginRight: "12px",
+    alignItems: "center",
+    borderRadius: "4px",
+  },
+  ".header-content.active": { color: "#2A2C33" },
+  ".header-content:hover": { backgroundColor: "#F0F0F0" },
 });
 
 const SortButton = styled("button")({
-  display: "inline-flex",
-  padding: "2px 4px 2px 0",
-  alignItems: "center",
-  gap: "5px",
+  position: "relative",
+  width: "12px",
+  height: "12px",
+  padding: 0,
+  marginLeft: "5px",
   border: 0,
-  borderRadius: "4px",
   background: "transparent",
-  color: "inherit",
-  font: "inherit",
   cursor: "pointer",
-  "&:hover": { backgroundColor: "#F0F0F0" },
+  verticalAlign: "middle",
+  svg: { position: "absolute", top: 0, left: 0 },
+  ".desc": { transform: "rotate(180deg)" },
 });
+
+const SortIcon = ({ direction }: { direction?: "asc" | "desc" }) => direction ? (
+  <svg className={direction} width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <path fillRule="evenodd" clipRule="evenodd" d="M6 11.25A5.25 5.25 0 1 0 6 .75a5.25 5.25 0 0 0 0 10.5Zm0-.9a4.35 4.35 0 1 0 0-8.7 4.35 4.35 0 0 0 0 8.7Z" fill="#1E1F23" />
+    <path d="M5.68 7.3V3.5h.64v3.8l1.73-1.67.45.44L6 8.5 3.5 6.07l.45-.44L5.68 7.3Z" fill="#1E1F23" stroke="#1E1F23" strokeWidth=".3" />
+  </svg>
+) : (
+  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+    <path d="M7.5 3.75 5 1.25l-2.5 2.5h5Zm0 2.5L5 8.75l-2.5-2.5h5Z" fill="#D3D7E0" />
+  </svg>
+);
 
 const Row = styled("tr", {
   shouldForwardProp: (prop) => !["$clickable", "$disableHover", "$backgroundHover"].includes(String(prop)),
 })<{ $clickable: boolean; $disableHover: boolean; $backgroundHover: boolean }>(
   ({ $clickable, $disableHover, $backgroundHover }) => ({
+    position: "relative",
     cursor: $clickable ? "pointer" : "default",
     ...(!$disableHover && {
       "&:hover": $backgroundHover
@@ -93,7 +116,8 @@ const Cell = styled("td")({
   fontSize: "12px",
   fontWeight: 400,
   verticalAlign: "middle",
-  ".secondary": { color: "#7C8694" },
+  cursor: "default",
+  ".cell-secondary-line": { color: "#7C8694" },
   "&.clickable": { cursor: "pointer" },
   "&.multi-clickable": {
     cursor: "pointer",
@@ -103,13 +127,10 @@ const Cell = styled("td")({
 });
 
 const Empty = styled("div")({
-  display: "flex",
-  minHeight: "300px",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "#B8BFCC",
-  fontSize: "18px",
-  fontWeight: 500,
+  position: "sticky",
+  left: 0,
+  width: "calc(100vw - 219px - 60px)",
+  height: "500px",
 });
 
 export interface ListTableColumn<T> {
@@ -157,7 +178,7 @@ export function ListTable<T>({
   columns,
   page = 1,
   pageSize = 10,
-  total = data.length,
+  total = 0,
   isLoading = false,
   showPageRange = true,
   showEdgePageButtons = true,
@@ -177,6 +198,8 @@ export function ListTable<T>({
   const [currentPage, setCurrentPage] = useState(page);
   const [sort, setSort] = useState<{ key: keyof T; direction: "asc" | "desc" }>();
   const [selectedKeys, setSelectedKeys] = useState<Set<Key>>(new Set());
+  const previousLoading = useRef(isLoading);
+  const containerRef = useRef<HTMLDivElement>(null);
   const clickableKeys = clickableKey == null ? [] : Array.isArray(clickableKey) ? clickableKey : [clickableKey];
   const multipleClickableCells = clickableKeys.length > 1;
   const rowClickable = Boolean(onRowClick || (onCellClick && clickableKeys.length === 1));
@@ -190,6 +213,10 @@ export function ListTable<T>({
   useEffect(() => {
     setCurrentPage((current) => Math.min(current, Math.max(1, Math.ceil(total / pageSize))));
   }, [pageSize, total]);
+  useEffect(() => {
+    if (!previousLoading.current && isLoading) setSort(undefined);
+    previousLoading.current = isLoading;
+  }, [isLoading]);
 
   const sortedData = [...data].sort((a, b) => {
     if (!sort) return 0;
@@ -211,6 +238,8 @@ export function ListTable<T>({
     setCurrentPage(next);
     updateSelection(new Set());
     onCurrentPageChange?.(next);
+    const scrollWrapper = containerRef.current?.closest(".page-scroll-wrapper");
+    if (scrollWrapper instanceof HTMLElement) scrollWrapper.scrollTo({ top: 0, behavior: "auto" });
   };
 
   const handleRowClick = (event: React.MouseEvent, row: T) => {
@@ -224,7 +253,7 @@ export function ListTable<T>({
   };
 
   return (
-    <Container>
+    <Container ref={containerRef} $empty={visibleData.length === 0}>
       <ScrollContainer>
         <Table>
           <Head $sticky={stickyHeader}>
@@ -241,12 +270,15 @@ export function ListTable<T>({
               {columns.map(({ key, label, width, sortable = true }) => (
                 <HeaderCell key={String(key)} style={{ width }} aria-sort={sort?.key === key ? (sort.direction === "asc" ? "ascending" : "descending") : undefined}>
                   {sortable ? (
-                    <SortButton
-                      type="button"
+                    <span
+                      className={`header-content${sort?.key === key ? " active" : ""}`}
                       onClick={() => setSort((current) => ({ key, direction: current?.key === key && current.direction === "asc" ? "desc" : "asc" }))}
                     >
-                      {label}<span aria-hidden="true">{sort?.key === key ? (sort.direction === "asc" ? "↑" : "↓") : "↕"}</span>
-                    </SortButton>
+                      {label}
+                      <SortButton type="button" tabIndex={-1}>
+                        <SortIcon direction={sort?.key === key ? sort.direction : undefined} />
+                      </SortButton>
+                    </span>
                   ) : label}
                 </HeaderCell>
               ))}
@@ -290,14 +322,18 @@ export function ListTable<T>({
                           onCellClick(columnKey, value, row);
                         }}
                       >
-                        {text?.includes("\n") ? <>{text.split("\n").map((line, lineIndex) => <div className={lineIndex ? "secondary" : undefined} key={lineIndex}>{line}</div>)}</> : (text ?? value as ReactNode)}
+                        {text?.includes("\n") ? <>{text.split("\n").map((line, lineIndex) => <div className={lineIndex ? "cell-secondary-line" : undefined} key={lineIndex}>{line}</div>)}</> : (text ?? value as ReactNode)}
                       </Cell>
                     );
                   })}
                 </Row>
               );
             }) : (
-              <tr><Cell colSpan={columns.length + (selectAllEnabled ? 1 : 0)}><Empty>{emptyContent}</Empty></Cell></tr>
+              <tr>
+                <td colSpan={columns.length + (selectAllEnabled ? 1 : 0)} style={{ position: "relative" }}>
+                  <Empty>{emptyContent}</Empty>
+                </td>
+              </tr>
             )}
           </tbody>
         </Table>

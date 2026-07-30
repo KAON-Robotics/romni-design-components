@@ -1,7 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { styled } from "@mui/material";
 const Root = styled("nav")({
-    position: "relative",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
     display: "flex",
     width: "100%",
     height: "52px",
@@ -10,7 +12,6 @@ const Root = styled("nav")({
     justifyContent: "center",
     gap: "8px",
     fontSize: "14px",
-    boxSizing: "border-box",
 });
 const Count = styled("span")({
     display: "flex",

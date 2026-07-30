@@ -64,6 +64,7 @@ const HeaderCell = styled("th")({
     marginRight: "12px",
     alignItems: "center",
     borderRadius: "4px",
+    cursor: "pointer",
   },
   ".header-content.active": { color: "#2A2C33" },
   ".header-content:hover": { backgroundColor: "#F0F0F0" },
@@ -79,7 +80,7 @@ const SortButton = styled("button")({
   background: "transparent",
   cursor: "pointer",
   verticalAlign: "middle",
-  svg: { position: "absolute", top: 0, left: 0 },
+  "svg, img": { position: "absolute", top: 0, left: 0 },
   ".desc": { transform: "rotate(180deg)" },
 });
 
@@ -103,7 +104,10 @@ const Row = styled("tr", {
     ...(!$disableHover && {
       "&:hover": $backgroundHover
         ? { backgroundColor: "#EBF1FF" }
-        : { boxShadow: "inset 0 0 0 1px #3A57E8, 0 4px 10px rgba(58, 87, 232, 0.2)" },
+        : {
+            borderRadius: "4px",
+            boxShadow: "0px 4px 10px 0px rgba(58, 87, 232, 0.20), inset 0 0 0 1px #3A57E8",
+          },
     }),
   }),
 );
@@ -119,10 +123,13 @@ const Cell = styled("td")({
   cursor: "default",
   ".cell-secondary-line": { color: "#7C8694" },
   "&.clickable": { cursor: "pointer" },
+  "&.row-clickable-cell": { cursor: "pointer" },
   "&.multi-clickable": {
+    color: "#3F4A5D",
     cursor: "pointer",
     textDecoration: "underline",
-    "&:hover": { color: "#3A57E8" },
+    textDecorationColor: "#3F4A5D",
+    "&:hover": { color: "#3A57E8", textDecorationColor: "#3A57E8" },
   },
 });
 
@@ -161,6 +168,8 @@ export interface ListTableProps<T> {
   clientPagination?: boolean;
   rowKey?: keyof T | ((row: T, index: number) => Key);
   emptyContent?: ReactNode;
+  sortIconSrc?: string;
+  sortActiveIconSrc?: string;
 }
 
 const sortableValue = (value: unknown): string | number => {
@@ -194,6 +203,8 @@ export function ListTable<T>({
   clientPagination = total === data.length,
   rowKey,
   emptyContent = "No results",
+  sortIconSrc,
+  sortActiveIconSrc,
 }: ListTableProps<T>) {
   const [currentPage, setCurrentPage] = useState(page);
   const [sort, setSort] = useState<{ key: keyof T; direction: "asc" | "desc" }>();
@@ -276,7 +287,17 @@ export function ListTable<T>({
                     >
                       {label}
                       <SortButton type="button" tabIndex={-1}>
-                        <SortIcon direction={sort?.key === key ? sort.direction : undefined} />
+                        {sort?.key === key && sortActiveIconSrc ? (
+                          <img
+                            src={sortActiveIconSrc}
+                            className={sort.direction}
+                            alt={sort.direction === "asc" ? "오름차순" : "내림차순"}
+                          />
+                        ) : sortIconSrc ? (
+                          <img src={sortIconSrc} alt="정렬하기" />
+                        ) : (
+                          <SortIcon direction={sort?.key === key ? sort.direction : undefined} />
+                        )}
                       </SortButton>
                     </span>
                   ) : label}
@@ -315,7 +336,7 @@ export function ListTable<T>({
                     return (
                       <Cell
                         key={String(columnKey)}
-                        className={clickable ? (multipleClickableCells ? "multi-clickable" : "clickable") : undefined}
+                        className={`${clickable ? (multipleClickableCells ? "multi-clickable" : "clickable") : ""}${rowClickable ? " row-clickable-cell" : ""}`.trim() || undefined}
                         onClick={(event) => {
                           if (!clickable || !onCellClick) return;
                           event.stopPropagation();

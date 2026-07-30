@@ -26,6 +26,8 @@ export interface ListTableProps<T> {
     clientPagination?: boolean;
     rowKey?: keyof T | ((row: T, index: number) => Key);
     emptyContent?: ReactNode;
+    sortIconSrc?: string;
+    sortActiveIconSrc?: string;
 }
-export declare function ListTable<T>({ data, columns, page, pageSize, total, isLoading, showPageRange, showEdgePageButtons, onRowClick, onCellClick, clickableKey, selectAllEnabled, getSelectedRows, onCurrentPageChange, backgroundHoverStyle, disableRowHover, stickyHeader, clientPagination, rowKey, emptyContent, }: ListTableProps<T>): React.JSX.Element;
+export declare function ListTable<T>({ data, columns, page, pageSize, total, isLoading, showPageRange, showEdgePageButtons, onRowClick, onCellClick, clickableKey, selectAllEnabled, getSelectedRows, onCurrentPageChange, backgroundHoverStyle, disableRowHover, stickyHeader, clientPagination, rowKey, emptyContent, sortIconSrc, sortActiveIconSrc, }: ListTableProps<T>): React.JSX.Element;
 //# sourceMappingURL=ListTable.d.ts.map

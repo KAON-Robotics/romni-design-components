@@ -52,7 +52,7 @@ const HeaderCell = styled("th")({
   position: "relative",
   height: "44px",
   paddingLeft: "16px",
-  color: "#7C8694",
+  color: "#596270",
   fontSize: "12px",
   fontWeight: 600,
   textAlign: "left",
@@ -68,20 +68,7 @@ const HeaderCell = styled("th")({
   },
   ".header-content.active": { color: "#2A2C33" },
   ".header-content:hover": { backgroundColor: "#F0F0F0" },
-});
-
-const SortButton = styled("button")({
-  position: "relative",
-  width: "12px",
-  height: "12px",
-  padding: 0,
-  marginLeft: "5px",
-  border: 0,
-  background: "transparent",
-  cursor: "pointer",
-  verticalAlign: "middle",
-  "svg, img": { position: "absolute", top: 0, left: 0 },
-  ".desc": { transform: "rotate(180deg)" },
+  ".header-content .desc": { transform: "rotate(180deg)" },
 });
 
 const SortIcon = ({ direction }: { direction?: "asc" | "desc" }) => direction ? (
@@ -121,7 +108,7 @@ const Cell = styled("td")({
   fontWeight: 400,
   verticalAlign: "middle",
   cursor: "default",
-  ".cell-secondary-line": { color: "#7C8694" },
+  ".cell-secondary-line": { color: "#596270" },
   "&.clickable": { cursor: "pointer" },
   "&.row-clickable-cell": { cursor: "pointer" },
   "&.multi-clickable": {
@@ -271,6 +258,9 @@ export function ListTable<T>({
             <tr>
               {selectAllEnabled && (
                 <HeaderCell style={{ width: 50 }}>
+                  <span style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clipPath: "inset(50%)" }}>
+                    선택
+                  </span>
                   <InputCheckbox
                     value="all"
                     isChecked={data.length > 0 && selectedKeys.size === data.length}
@@ -281,25 +271,28 @@ export function ListTable<T>({
               {columns.map(({ key, label, width, sortable = true }) => (
                 <HeaderCell key={String(key)} style={{ width }} aria-sort={sort?.key === key ? (sort.direction === "asc" ? "ascending" : "descending") : undefined}>
                   {sortable ? (
-                    <span
+                    <button
+                      type="button"
+                      aria-label={`${label} 정렬`}
                       className={`header-content${sort?.key === key ? " active" : ""}`}
                       onClick={() => setSort((current) => ({ key, direction: current?.key === key && current.direction === "asc" ? "desc" : "asc" }))}
                     >
                       {label}
-                      <SortButton type="button" tabIndex={-1}>
-                        {sort?.key === key && sortActiveIconSrc ? (
-                          <img
-                            src={sortActiveIconSrc}
-                            className={sort.direction}
-                            alt={sort.direction === "asc" ? "오름차순" : "내림차순"}
-                          />
-                        ) : sortIconSrc ? (
-                          <img src={sortIconSrc} alt="정렬하기" />
-                        ) : (
+                      {sort?.key === key && sortActiveIconSrc ? (
+                        <img
+                          src={sortActiveIconSrc}
+                          className={sort.direction}
+                          alt=""
+                          style={{ width: 12, height: 12, marginLeft: 5 }}
+                        />
+                      ) : sortIconSrc ? (
+                        <img src={sortIconSrc} alt="" style={{ width: 12, height: 12, marginLeft: 5 }} />
+                      ) : (
+                        <span style={{ display: "inline-flex", marginLeft: 5 }}>
                           <SortIcon direction={sort?.key === key ? sort.direction : undefined} />
-                        )}
-                      </SortButton>
-                    </span>
+                        </span>
+                      )}
+                    </button>
                   ) : label}
                 </HeaderCell>
               ))}

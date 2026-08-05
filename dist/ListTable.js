@@ -48,7 +48,7 @@ const HeaderCell = styled("th")({
     position: "relative",
     height: "44px",
     paddingLeft: "16px",
-    color: "#7C8694",
+    color: "#596270",
     fontSize: "12px",
     fontWeight: 600,
     textAlign: "left",
@@ -64,19 +64,7 @@ const HeaderCell = styled("th")({
     },
     ".header-content.active": { color: "#2A2C33" },
     ".header-content:hover": { backgroundColor: "#F0F0F0" },
-});
-const SortButton = styled("button")({
-    position: "relative",
-    width: "12px",
-    height: "12px",
-    padding: 0,
-    marginLeft: "5px",
-    border: 0,
-    background: "transparent",
-    cursor: "pointer",
-    verticalAlign: "middle",
-    "svg, img": { position: "absolute", top: 0, left: 0 },
-    ".desc": { transform: "rotate(180deg)" },
+    ".header-content .desc": { transform: "rotate(180deg)" },
 });
 const SortIcon = ({ direction }) => direction ? (_jsxs("svg", { className: direction, width: "12", height: "12", viewBox: "0 0 12 12", fill: "none", "aria-hidden": "true", children: [_jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M6 11.25A5.25 5.25 0 1 0 6 .75a5.25 5.25 0 0 0 0 10.5Zm0-.9a4.35 4.35 0 1 0 0-8.7 4.35 4.35 0 0 0 0 8.7Z", fill: "#1E1F23" }), _jsx("path", { d: "M5.68 7.3V3.5h.64v3.8l1.73-1.67.45.44L6 8.5 3.5 6.07l.45-.44L5.68 7.3Z", fill: "#1E1F23", stroke: "#1E1F23", strokeWidth: ".3" })] })) : (_jsx("svg", { width: "10", height: "10", viewBox: "0 0 10 10", fill: "none", "aria-hidden": "true", children: _jsx("path", { d: "M7.5 3.75 5 1.25l-2.5 2.5h5Zm0 2.5L5 8.75l-2.5-2.5h5Z", fill: "#D3D7E0" }) }));
 const Row = styled("tr", {
@@ -102,7 +90,7 @@ const Cell = styled("td")({
     fontWeight: 400,
     verticalAlign: "middle",
     cursor: "default",
-    ".cell-secondary-line": { color: "#7C8694" },
+    ".cell-secondary-line": { color: "#596270" },
     "&.clickable": { cursor: "pointer" },
     "&.row-clickable-cell": { cursor: "pointer" },
     "&.multi-clickable": {
@@ -192,7 +180,7 @@ export function ListTable({ data, columns, page = 1, pageSize = 10, total = 0, i
             onCellClick(key, row[key], row);
         }
     };
-    return (_jsxs(Container, { ref: containerRef, "$empty": visibleData.length === 0, children: [_jsx(ScrollContainer, { children: _jsxs(Table, { children: [_jsx(Head, { "$sticky": stickyHeader, children: _jsxs("tr", { children: [selectAllEnabled && (_jsx(HeaderCell, { style: { width: 50 }, children: _jsx(InputCheckbox, { value: "all", isChecked: data.length > 0 && selectedKeys.size === data.length, onChange: (event) => updateSelection(event.target.checked ? new Set(data.map(getKey)) : new Set()) }) })), columns.map(({ key, label, width, sortable = true }) => (_jsx(HeaderCell, { style: { width }, "aria-sort": (sort === null || sort === void 0 ? void 0 : sort.key) === key ? (sort.direction === "asc" ? "ascending" : "descending") : undefined, children: sortable ? (_jsxs("span", { className: `header-content${(sort === null || sort === void 0 ? void 0 : sort.key) === key ? " active" : ""}`, onClick: () => setSort((current) => ({ key, direction: (current === null || current === void 0 ? void 0 : current.key) === key && current.direction === "asc" ? "desc" : "asc" })), children: [label, _jsx(SortButton, { type: "button", tabIndex: -1, children: (sort === null || sort === void 0 ? void 0 : sort.key) === key && sortActiveIconSrc ? (_jsx("img", { src: sortActiveIconSrc, className: sort.direction, alt: sort.direction === "asc" ? "오름차순" : "내림차순" })) : sortIconSrc ? (_jsx("img", { src: sortIconSrc, alt: "\uC815\uB82C\uD558\uAE30" })) : (_jsx(SortIcon, { direction: (sort === null || sort === void 0 ? void 0 : sort.key) === key ? sort.direction : undefined })) })] })) : label }, String(key))))] }) }), _jsx("tbody", { children: visibleData.length > 0 ? visibleData.map((row, index) => {
+    return (_jsxs(Container, { ref: containerRef, "$empty": visibleData.length === 0, children: [_jsx(ScrollContainer, { children: _jsxs(Table, { children: [_jsx(Head, { "$sticky": stickyHeader, children: _jsxs("tr", { children: [selectAllEnabled && (_jsxs(HeaderCell, { style: { width: 50 }, children: [_jsx("span", { style: { position: "absolute", width: 1, height: 1, overflow: "hidden", clipPath: "inset(50%)" }, children: "\uC120\uD0DD" }), _jsx(InputCheckbox, { value: "all", isChecked: data.length > 0 && selectedKeys.size === data.length, onChange: (event) => updateSelection(event.target.checked ? new Set(data.map(getKey)) : new Set()) })] })), columns.map(({ key, label, width, sortable = true }) => (_jsx(HeaderCell, { style: { width }, "aria-sort": (sort === null || sort === void 0 ? void 0 : sort.key) === key ? (sort.direction === "asc" ? "ascending" : "descending") : undefined, children: sortable ? (_jsxs("button", { type: "button", "aria-label": `${label} 정렬`, className: `header-content${(sort === null || sort === void 0 ? void 0 : sort.key) === key ? " active" : ""}`, onClick: () => setSort((current) => ({ key, direction: (current === null || current === void 0 ? void 0 : current.key) === key && current.direction === "asc" ? "desc" : "asc" })), children: [label, (sort === null || sort === void 0 ? void 0 : sort.key) === key && sortActiveIconSrc ? (_jsx("img", { src: sortActiveIconSrc, className: sort.direction, alt: "", style: { width: 12, height: 12, marginLeft: 5 } })) : sortIconSrc ? (_jsx("img", { src: sortIconSrc, alt: "", style: { width: 12, height: 12, marginLeft: 5 } })) : (_jsx("span", { style: { display: "inline-flex", marginLeft: 5 }, children: _jsx(SortIcon, { direction: (sort === null || sort === void 0 ? void 0 : sort.key) === key ? sort.direction : undefined }) }))] })) : label }, String(key))))] }) }), _jsx("tbody", { children: visibleData.length > 0 ? visibleData.map((row, index) => {
                                 const key = getKey(row, index);
                                 return (_jsxs(Row, { "$clickable": rowClickable, "$disableHover": disableRowHover || multipleClickableCells, "$backgroundHover": backgroundHoverStyle, onClick: (event) => handleRowClick(event, row), children: [selectAllEnabled && (_jsx(Cell, { children: _jsx(InputCheckbox, { value: String(key), isChecked: selectedKeys.has(key), onChange: (event) => {
                                                     const next = new Set(selectedKeys);

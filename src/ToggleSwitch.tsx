@@ -51,7 +51,7 @@ const Switch = styled("label", {
 }));
 
 const Label = styled("span")({
-  color: "#7C8694",
+  color: "#596270",
   fontSize: "14px",
   fontWeight: 500,
 });
@@ -67,7 +67,13 @@ export interface ToggleSwitchProps {
 export const ToggleSwitch = ({ checked, label, onChange, small = false, disabled = false }: ToggleSwitchProps) => (
   <Root>
     <Switch $small={small}>
-      <input type="checkbox" checked={checked} disabled={disabled} onChange={onChange} />
+      <input
+        type="checkbox"
+        checked={checked}
+        disabled={disabled}
+        aria-label={typeof label === "string" ? label : "Toggle"}
+        onChange={onChange}
+      />
       <span className="slider" />
     </Switch>
     {label != null && <Label>{label}</Label>}

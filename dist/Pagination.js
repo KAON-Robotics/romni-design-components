@@ -24,7 +24,7 @@ const Count = styled("span")({
 const Range = styled("span")({
     position: "absolute",
     right: "20px",
-    color: "#7C8694",
+    color: "#596270",
     fontSize: "13px",
     fontWeight: 500,
     letterSpacing: "0.26px",

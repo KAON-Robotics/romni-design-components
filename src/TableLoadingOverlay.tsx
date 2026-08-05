@@ -27,6 +27,7 @@ export const TableLoadingOverlay = () => (
   <Overlay role="status" aria-label="Loading">
     <Spinner>
       <CircularProgress
+        aria-label="Loading"
         variant="determinate"
         value={85}
         size={36}

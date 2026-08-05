@@ -20,7 +20,7 @@ export interface InputMessageProps {
 }
 
 export const InputErrorMessage = ({ msg, align = "right" }: InputMessageProps) => (
-  <Message data-input-error-message="true" $align={align} $color="#FF4747">
+  <Message data-input-error-message="true" $align={align} $color="#C62828">
     {msg}
   </Message>
 );

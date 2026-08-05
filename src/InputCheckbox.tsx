@@ -111,6 +111,7 @@ export const InputCheckbox = ({
         value={value}
         checked={checked}
         disabled={readOnly}
+        aria-label={typeof label === "string" ? label : value === "all" ? "전체 선택" : "행 선택"}
         onChange={(event) => {
           setChecked(event.target.checked);
           onChange(event);

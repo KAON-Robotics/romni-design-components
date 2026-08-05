@@ -7,6 +7,7 @@ export { InputPassword } from "./InputPassword.js";
 export { InputRadioGroup } from "./InputRadioGroup.js";
 export { InfoTable, InfoTableBody, InfoTableRow } from "./InfoTable.js";
 export { ListTable } from "./ListTable.js";
+export { ListNoResult } from "./ListNoResult.js";
 export { MainLayout } from "./MainLayout.js";
 export { MultiSelectFilter } from "./MultiSelectFilter.js";
 export { NavTooltip } from "./NavTooltip.js";

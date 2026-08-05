@@ -2,6 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { styled } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { InputCheckbox } from "./InputCheckbox.js";
+import { ListNoResult } from "./ListNoResult.js";
 import { Pagination } from "./Pagination.js";
 import { TableLoadingOverlay } from "./TableLoadingOverlay.js";
 const Container = styled("div", {
@@ -119,7 +120,7 @@ const sortableValue = (value) => {
     }
     return "";
 };
-export function ListTable({ data, columns, page = 1, pageSize = 10, total = 0, isLoading = false, showPageRange = true, showEdgePageButtons = true, onRowClick, onCellClick, clickableKey, selectAllEnabled = false, getSelectedRows, onCurrentPageChange, backgroundHoverStyle = false, disableRowHover = false, stickyHeader = false, clientPagination = total === data.length, rowKey, emptyContent = "No results", sortIconSrc, sortActiveIconSrc, }) {
+export function ListTable({ data, columns, page = 1, pageSize = 10, total = 0, isLoading = false, showPageRange = true, showEdgePageButtons = true, onRowClick, onCellClick, clickableKey, selectAllEnabled = false, getSelectedRows, onCurrentPageChange, backgroundHoverStyle = false, disableRowHover = false, stickyHeader = false, clientPagination = total === data.length, rowKey, emptyContent = _jsx(ListNoResult, {}), sortIconSrc, sortActiveIconSrc, }) {
     const [currentPage, setCurrentPage] = useState(page);
     const [sort, setSort] = useState();
     const [selectedKeys, setSelectedKeys] = useState(new Set());

@@ -35,6 +35,10 @@ test("public components render", () => {
     data: [{ idx: 1, name: "ROMNI" }],
     columns: [{ key: "name", label: "Name" }],
   }));
+  const emptyTable = renderToStaticMarkup(React.createElement(ListTable, {
+    data: [],
+    columns: [{ key: "name", label: "Name" }],
+  }));
   const additions = renderToStaticMarkup(React.createElement(MainLayout, null,
     React.createElement(InfoTable, null,
       React.createElement(InfoTableRow, { label: "Name", required: true }, "ROMNI"),
@@ -68,6 +72,7 @@ test("public components render", () => {
   assert.match(button, />Save</);
   assert.match(pagination, /11 - 20 of 25/);
   assert.match(table, /ROMNI/);
+  assert.match(emptyTable, /검색 결과가 없습니다/);
   assert.match(additions, /관리자/);
   assert.match(additions, /Name/);
   assert.match(additions, /Required/);

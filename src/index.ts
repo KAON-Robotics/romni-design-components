@@ -16,6 +16,8 @@ export { InfoTable, InfoTableBody, InfoTableRow } from "./InfoTable.js";
 export type { InfoTableRowProps } from "./InfoTable.js";
 export { ListTable } from "./ListTable.js";
 export type { ListTableColumn, ListTableProps } from "./ListTable.js";
+export { ListNoResult } from "./ListNoResult.js";
+export type { ListNoResultProps } from "./ListNoResult.js";
 export { MainLayout } from "./MainLayout.js";
 export { MultiSelectFilter } from "./MultiSelectFilter.js";
 export type { MultiSelectFilterProps } from "./MultiSelectFilter.js";

@@ -22,7 +22,6 @@
     "test": "node --test test/*.test.mjs",
     "test:storybook": "vitest --project=storybook --run",
     "test:storybook:coverage": "vitest --project=storybook --run --coverage",
-    "chromatic": "chromatic --exit-zero-on-changes",
     "check": "pnpm run build && pnpm run test"
   },
   "engines": {
@@ -37,7 +36,6 @@
     "react-dom": ">=18 <19"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.2.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^5.8.3",
@@ -49,7 +47,6 @@
     "@types/react-dom": "^18.2.6",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.10",
-    "chromatic": "^18.1.0",
     "playwright": "^1.62.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

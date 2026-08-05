@@ -8,8 +8,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -32,6 +30,3 @@ jobs:
         with:
           name: storybook-static
           path: storybook-static
-      - name: Publish visual tests
-        if: ${{ env.CHROMATIC_PROJECT_TOKEN != '' }}
-        run: pnpm chromatic --project-token="$CHROMATIC_PROJECT_TOKEN"

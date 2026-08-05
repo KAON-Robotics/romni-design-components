@@ -8,7 +8,7 @@ const Root = styled("div")({
     alignItems: "center",
     justifyContent: "center",
     flexFlow: "column",
-    color: "#B8BFCC",
+    color: "#596270",
     fontSize: "18px",
     fontWeight: 500,
     lineHeight: 1.4,

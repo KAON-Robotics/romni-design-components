@@ -86,8 +86,11 @@ const Arrow = styled("span")({
   position: "absolute",
   top: "50%",
   right: "12px",
+  display: "flex",
   width: "16px",
   height: "16px",
+  alignItems: "center",
+  justifyContent: "center",
   pointerEvents: "none",
   transform: "translateY(-50%)",
 });

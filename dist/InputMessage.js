@@ -12,6 +12,6 @@ const Message = styled("div", {
     textAlign: $align,
     whiteSpace: "nowrap",
 }));
-export const InputErrorMessage = ({ msg, align = "right" }) => (_jsx(Message, { "data-input-error-message": "true", "$align": align, "$color": "#FF4747", children: msg }));
+export const InputErrorMessage = ({ msg, align = "right" }) => (_jsx(Message, { "data-input-error-message": "true", "$align": align, "$color": "#C62828", children: msg }));
 export const InputSuccessMessage = ({ msg, align = "right" }) => (_jsx(Message, { "$align": align, "$color": "#3A57E8", children: msg }));
 //# sourceMappingURL=InputMessage.js.map

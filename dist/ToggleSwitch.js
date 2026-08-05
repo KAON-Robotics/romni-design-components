@@ -48,9 +48,9 @@ const Switch = styled("label", {
     },
 }));
 const Label = styled("span")({
-    color: "#7C8694",
+    color: "#596270",
     fontSize: "14px",
     fontWeight: 500,
 });
-export const ToggleSwitch = ({ checked, label, onChange, small = false, disabled = false }) => (_jsxs(Root, { children: [_jsxs(Switch, { "$small": small, children: [_jsx("input", { type: "checkbox", checked: checked, disabled: disabled, onChange: onChange }), _jsx("span", { className: "slider" })] }), label != null && _jsx(Label, { children: label })] }));
+export const ToggleSwitch = ({ checked, label, onChange, small = false, disabled = false }) => (_jsxs(Root, { children: [_jsxs(Switch, { "$small": small, children: [_jsx("input", { type: "checkbox", checked: checked, disabled: disabled, "aria-label": typeof label === "string" ? label : "Toggle", onChange: onChange }), _jsx("span", { className: "slider" })] }), label != null && _jsx(Label, { children: label })] }));
 //# sourceMappingURL=ToggleSwitch.js.map

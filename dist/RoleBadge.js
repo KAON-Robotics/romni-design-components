@@ -22,9 +22,9 @@ const Badge = styled("span", {
     fontWeight: 600,
     "&.administrator": { color: "#173CBA", backgroundColor: "#EAEFFF" },
     "&.manager": { color: "#3A57E8", backgroundColor: "#F1F4FE" },
-    "&.executive": { color: "#B44CF9", backgroundColor: "#F8EEFF" },
-    "&.staff": { color: "#15A46E", backgroundColor: "#F0FBF7" },
-    "&.guest": { color: "#7C8694", backgroundColor: "#F2F3F4" },
+    "&.executive": { color: "#7B2CBF", backgroundColor: "#F8EEFF" },
+    "&.staff": { color: "#087A4F", backgroundColor: "#F0FBF7" },
+    "&.guest": { color: "#596270", backgroundColor: "#F2F3F4" },
 }));
 export const RoleBadge = ({ role, profile = false, label }) => {
     var _a;

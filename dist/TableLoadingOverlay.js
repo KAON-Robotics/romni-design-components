@@ -21,5 +21,5 @@ const Spinner = styled("div")({
         animation: "none",
     },
 });
-export const TableLoadingOverlay = () => (_jsx(Overlay, { role: "status", "aria-label": "Loading", children: _jsx(Spinner, { children: _jsx(CircularProgress, { variant: "determinate", value: 85, size: 36, thickness: 4.8, sx: { color: "#3A57E8" } }) }) }));
+export const TableLoadingOverlay = () => (_jsx(Overlay, { role: "status", "aria-label": "Loading", children: _jsx(Spinner, { children: _jsx(CircularProgress, { "aria-label": "Loading", variant: "determinate", value: 85, size: 36, thickness: 4.8, sx: { color: "#3A57E8" } }) }) }));
 //# sourceMappingURL=TableLoadingOverlay.js.map

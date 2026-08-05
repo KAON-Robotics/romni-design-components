@@ -1,4 +1,13 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+export type ButtonVariant = "primary" | "secondary" | "neutral";
+export type ButtonSize = "compact" | "medium" | "large";
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: ButtonVariant;
+    size?: ButtonSize;
+    startIcon?: ReactNode;
+    iconOnly?: boolean;
+}
+export declare const Button: ({ variant, size, startIcon, iconOnly, type, children, ...props }: ButtonProps) => import("react").JSX.Element;
 export interface InputButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     label: ReactNode;
 }

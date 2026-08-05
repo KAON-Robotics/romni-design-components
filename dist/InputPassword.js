@@ -13,7 +13,7 @@ const Input = styled("input")({
     color: "#2A2C33",
     fontSize: "16px",
     fontWeight: 500,
-    "&:read-only": { color: "#7C8694", backgroundColor: "#FAFAFA" },
+    "&:read-only": { color: "#596270", backgroundColor: "#FAFAFA" },
     "&::placeholder": { color: "#B8BFCC" },
     '&[aria-invalid="true"]': { borderColor: "#FF4747" },
 });

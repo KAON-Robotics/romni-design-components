@@ -64,7 +64,7 @@ export const InputCheckbox = ({ label, value, isChecked = false, readOnly = fals
     return (_jsxs(Label, { className: `${className !== null && className !== void 0 ? className : ""}${readOnly ? " disabled" : ""}`.trim() || undefined, "data-stop-row-click": "true", ...props, onClick: (event) => {
             event.stopPropagation();
             onClick === null || onClick === void 0 ? void 0 : onClick(event);
-        }, children: [_jsx(Check, { className: `input-checkbox${readOnly ? " disabled" : ""}${checked ? " checked" : ""}`, "$checked": checked, "$disabled": readOnly, "aria-hidden": "true" }), _jsx(HiddenInput, { type: "checkbox", value: value, checked: checked, disabled: readOnly, onChange: (event) => {
+        }, children: [_jsx(Check, { className: `input-checkbox${readOnly ? " disabled" : ""}${checked ? " checked" : ""}`, "$checked": checked, "$disabled": readOnly, "aria-hidden": "true" }), _jsx(HiddenInput, { type: "checkbox", value: value, checked: checked, disabled: readOnly, "aria-label": typeof label === "string" ? label : value === "all" ? "전체 선택" : "행 선택", onChange: (event) => {
                     setChecked(event.target.checked);
                     onChange(event);
                 } }), label] }));

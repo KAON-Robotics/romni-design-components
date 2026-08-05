@@ -1,6 +1,7 @@
 import { styled } from "@mui/material";
 import React, { type Key, type ReactNode, useEffect, useRef, useState } from "react";
 import { InputCheckbox } from "./InputCheckbox.js";
+import { ListNoResult } from "./ListNoResult.js";
 import { Pagination } from "./Pagination.js";
 import { TableLoadingOverlay } from "./TableLoadingOverlay.js";
 
@@ -189,7 +190,7 @@ export function ListTable<T>({
   stickyHeader = false,
   clientPagination = total === data.length,
   rowKey,
-  emptyContent = "No results",
+  emptyContent = <ListNoResult />,
   sortIconSrc,
   sortActiveIconSrc,
 }: ListTableProps<T>) {

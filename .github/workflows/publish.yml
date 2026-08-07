@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          registry-url: hhttps://npm.pkg.github.com
+          registry-url: https://npm.pkg.github.com
       - name: Configure npm auth
         run: |
           cat <<EOF > ~/.npmrc

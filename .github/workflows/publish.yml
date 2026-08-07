@@ -2,7 +2,7 @@ name: Publish package
 
 on:
   push:
-    branches: [main]
+    # branches: [main]
 
 permissions:
   contents: write
@@ -22,7 +22,9 @@ jobs:
           node-version: 24
           cache: pnpm
           registry-url: https://nexus.romni.io/repository/npm-local/
-      - run: pnpm install --frozen-lockfile
+      - run: |
+          pnpm -v
+          pnpm install --frozen-lockfile
       - run: pnpm check
       - id: package
         run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
@@ -31,7 +33,7 @@ jobs:
           printf %s "$NODE_AUTH_TOKEN" | sha256sum
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
-      - run: pnpm publish --no-git-checks
+      - run: PNPM_LOG_LEVEL=debug pnpm publish --no-git-checks --reporter append-only
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
       - run: |
@@ -42,3 +44,4 @@ jobs:
           git add package.json
           git commit -m "chore: prepare next patch version"
           git push --atomic origin HEAD:main "v${{ steps.package.outputs.version }}"
+        if: github.ref_name == 'main'

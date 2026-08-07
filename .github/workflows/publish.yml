@@ -2,7 +2,7 @@ name: Publish package
 
 on:
   push:
-    branches: [main,fix/ci-workflow]
+    branches: [main]
 
 permissions:
   contents: write
@@ -34,7 +34,6 @@ jobs:
       - run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
-        if: github.ref_name == 'main'  
       - run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -43,4 +42,3 @@ jobs:
           git add package.json
           git commit -m "chore: prepare next patch version"
           git push --atomic origin HEAD:main "v${{ steps.package.outputs.version }}"
-        if: github.ref_name == 'main'

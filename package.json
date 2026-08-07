@@ -1,8 +1,10 @@
 {
   "name": "@romni/design-components",
   "version": "0.1.5",
-  "private": true,
   "type": "module",
+  "publishConfig": {
+    "registry": "https://nexus.romni.io/repository/npm-local/"
+  },
   "files": [
     "dist"
   ],

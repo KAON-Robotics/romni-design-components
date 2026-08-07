@@ -24,25 +24,25 @@ jobs:
           node-version: 24
           cache: pnpm
           registry-url: https://nexus.romni.io/repository/npm/
-      - name: debug
-        run: |
-          echo "Token length: ${#NODE_AUTH_TOKEN}"
-          printf %s "$NODE_AUTH_TOKEN" | sha256sum
+      # - name: debug
+      #   run: |
+      #     echo "Token length: ${#NODE_AUTH_TOKEN}"
+      #     printf %s "$NODE_AUTH_TOKEN" | sha256sum
 
-          echo "===== curl ====="
-          curl -sv \
-            -H "Authorization: Bearer ${NODE_AUTH_TOKEN}" \
-            "https://nexus.romni.io/repository/npm/@romni%2fdesign-components" \
-            -o /tmp/nexus-response.json
+      #     echo "===== curl ====="
+      #     curl -sv \
+      #       -H "Authorization: Bearer ${NODE_AUTH_TOKEN}" \
+      #       "https://nexus.romni.io/repository/npm/@romni%2fdesign-components" \
+      #       -o /tmp/nexus-response.json
 
-          echo
-          echo "===== response ====="
-          cat /tmp/nexus-response.json          
-          npm view @romni/design-components \
-            --registry=https://nexus.romni.io/repository/npm/
-          echo "===== ~/.npmrc ====="
-          npm whoami --registry=https://nexus.romni.io/repository/npm/
-          pnpm -v
+      #     echo
+      #     echo "===== response ====="
+      #     cat /tmp/nexus-response.json          
+      #     npm view @romni/design-components \
+      #       --registry=https://nexus.romni.io/repository/npm/
+      #     echo "===== ~/.npmrc ====="
+      #     npm whoami --registry=https://nexus.romni.io/repository/npm/
+      #     pnpm -v
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
       - run: |

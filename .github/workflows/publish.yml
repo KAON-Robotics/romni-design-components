@@ -10,6 +10,8 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -31,11 +33,9 @@ jobs:
       - run: |
           echo "Token length: ${#NODE_AUTH_TOKEN}"
           printf %s "$NODE_AUTH_TOKEN" | sha256sum
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
+        
       - run: PNPM_LOG_LEVEL=debug pnpm publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
+
       - run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com

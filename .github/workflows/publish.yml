@@ -33,7 +33,7 @@ jobs:
           printf %s "$NODE_AUTH_TOKEN" | sha256sum
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
-      - run: PNPM_LOG_LEVEL=debug pnpm --reporter=append-only publish --no-git-checks
+      - run: PNPM_LOG_LEVEL=debug pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
       - run: |

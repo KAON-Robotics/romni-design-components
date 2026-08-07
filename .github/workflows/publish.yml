@@ -27,6 +27,7 @@ jobs:
       - run: |
           echo "===== ~/.npmrc ====="
           cat /home/runner/work/_temp/.npmrc
+          npm whoami --registry=https://nexus.romni.io/repository/npm-local/
       - run: |
           pnpm -v
           pnpm install --frozen-lockfile

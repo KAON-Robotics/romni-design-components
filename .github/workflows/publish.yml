@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   release:
+    if: github.actor != 'KAON-Release-Bot'
     runs-on: ubuntu-slim
     steps:
       - name: Generate GitHub App Token
@@ -22,14 +23,16 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token }}
+
       - uses: pnpm/action-setup@v6
         with:
           version: 10.32.1
+
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
-          registry-url: https://npm.pkg.github.com
+
       - name: Install dependencies
         run: |
           pnpm install --frozen-lockfile
@@ -48,5 +51,5 @@ jobs:
             git tag "v${{ steps.package.outputs.version }}" "$GITHUB_SHA"
           pnpm version patch --no-git-tag-version
           git add package.json
-          git commit -m "chore: prepare next patch version"
+          git commit -m "chore: prepare next patch version [skip ci]"
           git push --atomic origin HEAD:main "v${{ steps.package.outputs.version }}"

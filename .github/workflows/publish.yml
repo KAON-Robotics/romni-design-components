@@ -28,6 +28,8 @@ jobs:
         run: |
           echo "Token length: ${#NODE_AUTH_TOKEN}"
           printf %s "$NODE_AUTH_TOKEN" | sha256sum
+          npm view @romni/design-components \
+            --registry=https://nexus.romni.io/repository/npm-local/
           echo "===== ~/.npmrc ====="
           cat /home/runner/work/_temp/.npmrc
           npm whoami --registry=https://nexus.romni.io/repository/npm-local/

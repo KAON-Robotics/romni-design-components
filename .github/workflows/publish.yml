@@ -1,16 +1,15 @@
-name: Publish package
+name: Release new version
 
 on:
   push:
-    # branches: [main]
+    branches: [main]
 
 permissions:
   contents: write
-  packages: write
 
 jobs:
-  publish:
-    runs-on: self-hosted
+  release:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
         with:
@@ -23,32 +22,15 @@ jobs:
           node-version: 24
           cache: pnpm
           registry-url: https://npm.pkg.github.com
-      - name: Configure npm auth
-        run: |
-          cat <<EOF > ~/.npmrc
-          @kaon-robotics:registry=https://npm.pkg.github.com
-          //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-          EOF
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install dependencies
         run: |
           pnpm install --frozen-lockfile
       - name: Check
         run: pnpm check
-
       - id: package
         name: Get package version
         run: |
           echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
-      # - run: |
-      #     echo "Token length: ${#NODE_AUTH_TOKEN}"
-      #     printf %s "$NODE_AUTH_TOKEN" | sha256sum
-      - name: Publish package
-        run: |
-          pnpm publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Prepare next version
         if: github.ref_name == 'main'
         run: |

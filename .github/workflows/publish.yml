@@ -11,13 +11,13 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10.32.1
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
@@ -29,7 +29,6 @@ jobs:
       - run: |
           echo "Token length: ${#NODE_AUTH_TOKEN}"
           printf %s "$NODE_AUTH_TOKEN" | sha256sum
-          npm whoami
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
       - run: pnpm publish --no-git-checks

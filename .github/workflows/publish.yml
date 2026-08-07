@@ -24,12 +24,17 @@ jobs:
           node-version: 24
           cache: pnpm
           registry-url: https://nexus.romni.io/repository/npm-local/
-      - run: |
+      - name: debug
+        run: |
+          echo "Token length: ${#NODE_AUTH_TOKEN}"
+          printf %s "$NODE_AUTH_TOKEN" | sha256sum
           echo "===== ~/.npmrc ====="
           cat /home/runner/work/_temp/.npmrc
           npm whoami --registry=https://nexus.romni.io/repository/npm-local/
-      - run: |
           pnpm -v
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NEXUS_NPM_TOKEN }}
+      - run: |
           pnpm install --frozen-lockfile
       - run: pnpm check
       - id: package

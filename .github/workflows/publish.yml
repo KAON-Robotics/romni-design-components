@@ -25,6 +25,9 @@ jobs:
           cache: pnpm
           registry-url: https://nexus.romni.io/repository/npm-local/
       - run: |
+          echo "===== ~/.npmrc ====="
+          cat ~/.npmrc      
+      - run: |
           pnpm -v
           pnpm install --frozen-lockfile
       - run: pnpm check

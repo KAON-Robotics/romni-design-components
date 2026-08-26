@@ -32,7 +32,7 @@ const Check = styled("div", {
     "&::before, &::after": {
         position: "absolute",
         backgroundColor: "white",
-        content: $checked || $disabled ? "''" : "none",
+        content: "''",
     },
     "&::before": {
         top: "5px",

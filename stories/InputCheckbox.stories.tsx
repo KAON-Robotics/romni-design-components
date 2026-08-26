@@ -19,3 +19,4 @@ const InteractiveCheckbox = () => {
 export const Default: Story = { render: () => <InteractiveCheckbox /> };
 export const Checked: Story = { args: { isChecked: true } };
 export const ReadOnly: Story = { args: { isChecked: true, readOnly: true } };
+export const ReadOnlyUnchecked: Story = { args: { isChecked: false, readOnly: true } };

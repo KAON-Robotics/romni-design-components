@@ -34,12 +34,12 @@ const Check = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   borderRadius: "4px",
-  backgroundColor: $disabled ? "#7C8694" : $checked ? "#3A57E8" : "#F0F0F0",
+  backgroundColor: $checked ? ($disabled ? "#7C8694" : "#3A57E8") : "#F0F0F0",
   transition: "background-color 0.15s ease",
   "&::before, &::after": {
     position: "absolute",
     backgroundColor: "white",
-    content: "''",
+    content: $checked || $disabled ? "''" : "none",
   },
   "&::before": {
     top: "5px",

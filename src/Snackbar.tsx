@@ -77,12 +77,15 @@ export const Snackbar = ({
   ...props
 }: SnackbarProps) => {
   const [mounted, setMounted] = useState(open);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (open) {
       setMounted(true);
-      return;
+      const frame = window.requestAnimationFrame(() => setVisible(true));
+      return () => window.cancelAnimationFrame(frame);
     }
+    setVisible(false);
     const timeout = window.setTimeout(() => setMounted(false), 200);
     return () => window.clearTimeout(timeout);
   }, [open]);
@@ -101,7 +104,7 @@ export const Snackbar = ({
       $horizontal={horizontal}
       $vertical={vertical}
       $offset={offset}
-      $open={open}
+      $open={visible}
       {...props}
     >
       {icon ??

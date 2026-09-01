@@ -43,11 +43,14 @@ const Popup = styled("div", {
 }));
 export const Snackbar = ({ open, message, onClose, autoHideDuration = 3000, icon, variant = "info", horizontal = "center", vertical = "top", offset = vertical === "top" ? 70 : 30, ...props }) => {
     const [mounted, setMounted] = useState(open);
+    const [visible, setVisible] = useState(false);
     useEffect(() => {
         if (open) {
             setMounted(true);
-            return;
+            const frame = window.requestAnimationFrame(() => setVisible(true));
+            return () => window.cancelAnimationFrame(frame);
         }
+        setVisible(false);
         const timeout = window.setTimeout(() => setMounted(false), 200);
         return () => window.clearTimeout(timeout);
     }, [open]);
@@ -59,7 +62,7 @@ export const Snackbar = ({ open, message, onClose, autoHideDuration = 3000, icon
     }, [autoHideDuration, onClose, open]);
     if (!mounted)
         return null;
-    const popup = (_jsxs(Popup, { role: "status", "$horizontal": horizontal, "$vertical": vertical, "$offset": offset, "$open": open, ...props, children: [icon !== null && icon !== void 0 ? icon : (variant === "success" ? _jsx(IconCheckFill, {}) : _jsx(IconInfoFill, {})), _jsx("span", { children: message })] }));
+    const popup = (_jsxs(Popup, { role: "status", "$horizontal": horizontal, "$vertical": vertical, "$offset": offset, "$open": visible, ...props, children: [icon !== null && icon !== void 0 ? icon : (variant === "success" ? _jsx(IconCheckFill, {}) : _jsx(IconInfoFill, {})), _jsx("span", { children: message })] }));
     return typeof document === "undefined" ? popup : createPortal(popup, document.body);
 };
 //# sourceMappingURL=Snackbar.js.map

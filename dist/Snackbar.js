@@ -1,11 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { styled } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { IconCheckFill, IconInfoFill } from "./SnackbarIcons.js";
 const Popup = styled("div", {
-    shouldForwardProp: (prop) => !["$horizontal", "$vertical", "$offset"].includes(String(prop)),
-})(({ $horizontal, $vertical, $offset }) => ({
+    shouldForwardProp: (prop) => !["$horizontal", "$vertical", "$offset", "$open"].includes(String(prop)),
+})(({ $horizontal, $vertical, $offset, $open }) => ({
     position: "fixed",
     top: $vertical === "top" ? `${$offset}px` : "auto",
     right: $horizontal === "right" ? `${$offset}px` : "auto",
@@ -30,7 +30,9 @@ const Popup = styled("div", {
     fontWeight: 500,
     lineHeight: "18px",
     textShadow: "0 0 2px rgba(0, 0, 0, 0.3)",
-    transform: $horizontal === "center" ? "translateX(-50%)" : "none",
+    opacity: $open ? 1 : 0,
+    transform: `${$horizontal === "center" ? "translateX(-50%) " : ""}translateY(${$open ? "0" : $vertical === "top" ? "-12px" : "12px"})`,
+    transition: "opacity 200ms ease, transform 200ms ease",
     whiteSpace: "nowrap",
     "& .romni-snackbar-icon": {
         display: "block",
@@ -40,15 +42,24 @@ const Popup = styled("div", {
     },
 }));
 export const Snackbar = ({ open, message, onClose, autoHideDuration = 3000, icon, variant = "info", horizontal = "center", vertical = "top", offset = vertical === "top" ? 70 : 30, ...props }) => {
+    const [mounted, setMounted] = useState(open);
+    useEffect(() => {
+        if (open) {
+            setMounted(true);
+            return;
+        }
+        const timeout = window.setTimeout(() => setMounted(false), 200);
+        return () => window.clearTimeout(timeout);
+    }, [open]);
     useEffect(() => {
         if (!open || autoHideDuration == null || !onClose)
             return;
         const timeout = window.setTimeout(onClose, autoHideDuration);
         return () => window.clearTimeout(timeout);
     }, [autoHideDuration, onClose, open]);
-    if (!open)
+    if (!mounted)
         return null;
-    const popup = (_jsxs(Popup, { role: "status", "$horizontal": horizontal, "$vertical": vertical, "$offset": offset, ...props, children: [icon !== null && icon !== void 0 ? icon : (variant === "success" ? _jsx(IconCheckFill, {}) : _jsx(IconInfoFill, {})), _jsx("span", { children: message })] }));
+    const popup = (_jsxs(Popup, { role: "status", "$horizontal": horizontal, "$vertical": vertical, "$offset": offset, "$open": open, ...props, children: [icon !== null && icon !== void 0 ? icon : (variant === "success" ? _jsx(IconCheckFill, {}) : _jsx(IconInfoFill, {})), _jsx("span", { children: message })] }));
     return typeof document === "undefined" ? popup : createPortal(popup, document.body);
 };
 //# sourceMappingURL=Snackbar.js.map

@@ -1,6 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { styled } from "@mui/material";
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { IconCheckFill, IconInfoFill } from "./SnackbarIcons.js";
 const Popup = styled("div", {
     shouldForwardProp: (prop) => !["$horizontal", "$vertical", "$offset"].includes(String(prop)),
@@ -47,6 +48,7 @@ export const Snackbar = ({ open, message, onClose, autoHideDuration = 3000, icon
     }, [autoHideDuration, onClose, open]);
     if (!open)
         return null;
-    return (_jsxs(Popup, { role: "status", "$horizontal": horizontal, "$vertical": vertical, "$offset": offset, ...props, children: [icon !== null && icon !== void 0 ? icon : (variant === "success" ? _jsx(IconCheckFill, {}) : _jsx(IconInfoFill, {})), _jsx("span", { children: message })] }));
+    const popup = (_jsxs(Popup, { role: "status", "$horizontal": horizontal, "$vertical": vertical, "$offset": offset, ...props, children: [icon !== null && icon !== void 0 ? icon : (variant === "success" ? _jsx(IconCheckFill, {}) : _jsx(IconInfoFill, {})), _jsx("span", { children: message })] }));
+    return typeof document === "undefined" ? popup : createPortal(popup, document.body);
 };
 //# sourceMappingURL=Snackbar.js.map

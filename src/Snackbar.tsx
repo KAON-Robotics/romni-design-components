@@ -1,6 +1,7 @@
 import { styled } from "@mui/material";
 import { useEffect } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { IconCheckFill, IconInfoFill } from "./SnackbarIcons.js";
 
 const Popup = styled("div", {
@@ -78,7 +79,7 @@ export const Snackbar = ({
 
   if (!open) return null;
 
-  return (
+  const popup = (
     <Popup
       role="status"
       $horizontal={horizontal}
@@ -91,4 +92,5 @@ export const Snackbar = ({
       <span>{message}</span>
     </Popup>
   );
+  return typeof document === "undefined" ? popup : createPortal(popup, document.body);
 };

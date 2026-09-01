@@ -6,7 +6,7 @@ import { IconCheckFill, IconInfoFill } from "./SnackbarIcons.js";
 
 const Popup = styled("div", {
   shouldForwardProp: (prop) =>
-    !["$horizontal", "$vertical", "$offset"].includes(String(prop)),
+    !["$horizontal", "$vertical", "$offset", "$open"].includes(String(prop)),
 })<{
   $horizontal: "left" | "center" | "right";
   $vertical: "top" | "bottom";

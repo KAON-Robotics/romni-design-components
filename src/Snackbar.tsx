@@ -1,5 +1,5 @@
 import { styled } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { IconCheckFill, IconInfoFill } from "./SnackbarIcons.js";
@@ -11,7 +11,8 @@ const Popup = styled("div", {
   $horizontal: "left" | "center" | "right";
   $vertical: "top" | "bottom";
   $offset: number;
-}>(({ $horizontal, $vertical, $offset }) => ({
+  $open: boolean;
+}>(({ $horizontal, $vertical, $offset, $open }) => ({
   position: "fixed",
   top: $vertical === "top" ? `${$offset}px` : "auto",
   right: $horizontal === "right" ? `${$offset}px` : "auto",
@@ -37,7 +38,11 @@ const Popup = styled("div", {
   fontWeight: 500,
   lineHeight: "18px",
   textShadow: "0 0 2px rgba(0, 0, 0, 0.3)",
-  transform: $horizontal === "center" ? "translateX(-50%)" : "none",
+  opacity: $open ? 1 : 0,
+  transform: `${$horizontal === "center" ? "translateX(-50%) " : ""}translateY(${
+    $open ? "0" : $vertical === "top" ? "-12px" : "12px"
+  })`,
+  transition: "opacity 200ms ease, transform 200ms ease",
   whiteSpace: "nowrap",
   "& .romni-snackbar-icon": {
     display: "block",
@@ -71,13 +76,24 @@ export const Snackbar = ({
   offset = vertical === "top" ? 70 : 30,
   ...props
 }: SnackbarProps) => {
+  const [mounted, setMounted] = useState(open);
+
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+      return;
+    }
+    const timeout = window.setTimeout(() => setMounted(false), 200);
+    return () => window.clearTimeout(timeout);
+  }, [open]);
+
   useEffect(() => {
     if (!open || autoHideDuration == null || !onClose) return;
     const timeout = window.setTimeout(onClose, autoHideDuration);
     return () => window.clearTimeout(timeout);
   }, [autoHideDuration, onClose, open]);
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   const popup = (
     <Popup
@@ -85,6 +101,7 @@ export const Snackbar = ({
       $horizontal={horizontal}
       $vertical={vertical}
       $offset={offset}
+      $open={open}
       {...props}
     >
       {icon ??

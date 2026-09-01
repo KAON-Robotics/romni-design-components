@@ -19,6 +19,7 @@ import {
   RoleBadge,
   SelectBox,
   SingleSelectFilter,
+  Snackbar,
   ToggleSwitch,
 } from "../dist/index.js";
 
@@ -66,6 +67,8 @@ test("public components render", () => {
       placeholder: "Choose",
       options: [{ label: "KARINA", value: "karina" }],
     }),
+    React.createElement(Snackbar, { open: true, message: "Robot offline" }),
+    React.createElement(Snackbar, { open: true, variant: "success", message: "Saved" }),
   ));
 
   assert.match(primaryButton, />Save</);
@@ -82,4 +85,6 @@ test("public components render", () => {
   assert.match(migrated, /도움말/);
   assert.match(migrated, /All/);
   assert.match(migrated, /Choose/);
+  assert.match(migrated, /Robot offline/);
+  assert.match(migrated, /Saved/);
 });

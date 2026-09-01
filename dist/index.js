@@ -15,6 +15,8 @@ export { Pagination } from "./Pagination.js";
 export { RoleBadge } from "./RoleBadge.js";
 export { SelectBox } from "./SelectBox.js";
 export { SingleSelectFilter } from "./SingleSelectFilter.js";
+export { Snackbar } from "./Snackbar.js";
+export { IconCheckFill, IconInfoFill } from "./SnackbarIcons.js";
 export { TableLoadingOverlay } from "./TableLoadingOverlay.js";
 export { ToggleSwitch } from "./ToggleSwitch.js";
 export { centerBackdropMotion, centerModalMotion, floatingMenuMotion, motion, reducedMotion } from "./motion.js";

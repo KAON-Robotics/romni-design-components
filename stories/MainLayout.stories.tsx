@@ -8,4 +8,4 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-export const Default: Story = { render: () => <div style={{ height: 260 }}><MainLayout><aside style={{ width: 180, padding: 20, background: "#1E1F23", color: "white" }}>Navigation</aside><main style={{ flex: 1, padding: 20, background: "white" }}>Main content</main></MainLayout></div> };
+export const Default: Story = { render: () => <div style={{ height: 260 }}><MainLayout><aside style={{ width: 180, padding: 20, background: "var(--romni-surface-raised, #1E1F23)", color: "white" }}>Navigation</aside><main style={{ flex: 1, padding: 20, background: "var(--romni-surface, white)" }}>Main content</main></MainLayout></div> };

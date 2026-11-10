@@ -26,7 +26,7 @@ const Switch = styled("label", {
     position: "absolute",
     inset: 0,
     borderRadius: "34px",
-    backgroundColor: "#CCC",
+    backgroundColor: "var(--romni-surface-raised, #CCC)",
     transition: "background-color 0.2s",
     "&::before": {
       position: "absolute",
@@ -35,23 +35,23 @@ const Switch = styled("label", {
       width: $small ? "12px" : "22px",
       height: $small ? "12px" : "22px",
       borderRadius: "50%",
-      backgroundColor: "#FFF",
+      backgroundColor: "var(--romni-control-mark, #FFF)",
       content: '""',
       transition: "transform 0.2s",
     },
   },
-  "input:checked + .slider": { backgroundColor: "#3366FF" },
+  "input:checked + .slider": { backgroundColor: "var(--romni-blue-solid, #3366FF)" },
   "input:checked + .slider::before": {
     transform: $small ? "translateX(16px)" : "translateX(22px)",
   },
-  "input:focus-visible + .slider": { outline: "2px solid #173CBA", outlineOffset: "2px" },
+  "input:focus-visible + .slider": { outline: "2px solid var(--romni-blue-text, #173CBA)", outlineOffset: "2px" },
   "@media (prefers-reduced-motion: reduce)": {
     ".slider, .slider::before": { transition: "none" },
   },
 }));
 
 const Label = styled("span")({
-  color: "#596270",
+  color: "var(--romni-text-muted, #596270)",
   fontSize: "14px",
   fontWeight: 500,
 });

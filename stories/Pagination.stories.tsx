@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 const InteractivePagination = () => {
   const [page, setPage] = useState(2);
-  return <div style={{ position: "relative", width: 640, height: 52, background: "white" }}><Pagination page={page} pageSize={10} total={47} onPageChange={setPage} /></div>;
+  return <div style={{ position: "relative", width: 640, height: 52, background: "var(--romni-surface, white)" }}><Pagination page={page} pageSize={10} total={47} onPageChange={setPage} /></div>;
 };
 
 export const Default: Story = { render: () => <InteractivePagination /> };

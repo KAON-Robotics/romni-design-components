@@ -8,13 +8,13 @@ const Label = styled("label", {
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    color: "#3F4A5D",
+    color: "var(--romni-text-muted, #3F4A5D)",
     cursor: $readOnly ? "default" : "pointer",
     fontSize: "16px",
     fontWeight: 500,
     "&:hover .radio-check:not(.checked):not(.disabled)": {
-        borderColor: "#D4E4FF",
-        backgroundColor: "#D4E4FF",
+        borderColor: "var(--romni-blue-text, #D4E4FF)",
+        backgroundColor: "var(--romni-blue-bg, #D4E4FF)",
     },
 }));
 const Check = styled("div", {
@@ -26,9 +26,9 @@ const Check = styled("div", {
     height: "26px",
     alignItems: "center",
     justifyContent: "center",
-    border: `1px solid ${$checked ? ($disabled ? "#7C8694" : "#3A57E8") : "#F0F0F0"}`,
+    border: `1px solid ${$checked ? ($disabled ? "var(--romni-border-strong, #7C8694)" : "var(--romni-blue-text, #3A57E8)") : "var(--romni-control-border, #F0F0F0)"}`,
     borderRadius: "50%",
-    backgroundColor: $checked ? ($disabled ? "#7C8694" : "#3A57E8") : "#F0F0F0",
+    backgroundColor: $checked ? ($disabled ? "var(--romni-surface-raised, #7C8694)" : "var(--romni-blue-solid, #3A57E8)") : "var(--romni-surface-subtle, #F0F0F0)",
     transition: "background-color 0.2s ease",
     "&::after": {
         position: "absolute",
@@ -37,7 +37,7 @@ const Check = styled("div", {
         width: "12px",
         height: "12px",
         borderRadius: "50%",
-        backgroundColor: "#FFF",
+        backgroundColor: $checked ? "var(--romni-control-mark, #FFF)" : "var(--romni-surface-subtle, #FFF)",
         content: "''",
         transform: "translate(-50%, -50%)",
     },

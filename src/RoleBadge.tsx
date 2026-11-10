@@ -21,11 +21,11 @@ const Badge = styled("span", {
   borderRadius: "4px",
   fontSize: $profile ? "16px" : "12px",
   fontWeight: 600,
-  "&.administrator": { color: "#173CBA", backgroundColor: "#EAEFFF" },
-  "&.manager": { color: "#3A57E8", backgroundColor: "#F1F4FE" },
-  "&.executive": { color: "#7B2CBF", backgroundColor: "#F8EEFF" },
-  "&.staff": { color: "#087A4F", backgroundColor: "#F0FBF7" },
-  "&.guest": { color: "#596270", backgroundColor: "#F2F3F4" },
+  "&.administrator": { color: "var(--romni-blue-text, #173CBA)", backgroundColor: "var(--romni-blue-bg, #EAEFFF)" },
+  "&.manager": { color: "var(--romni-blue-text, #3A57E8)", backgroundColor: "var(--romni-blue-bg, #F1F4FE)" },
+  "&.executive": { color: "var(--romni-purple-text, #7B2CBF)", backgroundColor: "var(--romni-purple-bg, #F8EEFF)" },
+  "&.staff": { color: "var(--romni-green-text, #087A4F)", backgroundColor: "var(--romni-green-bg, #F0FBF7)" },
+  "&.guest": { color: "var(--romni-text-muted, #596270)", backgroundColor: "var(--romni-surface-subtle, #F2F3F4)" },
 }));
 
 export interface RoleBadgeProps {

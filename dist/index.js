@@ -1,4 +1,5 @@
 export { Button, DeleteRowButton, InputButton } from "./Button.js";
+export { RomniThemeProvider, romniDarkTheme, romniLightTheme, romniDarkTokens } from "./theme.js";
 export { DashboardCount } from "./DashboardCount.js";
 export { HelpTooltip } from "./HelpTooltip.js";
 export { InputCheckbox } from "./InputCheckbox.js";

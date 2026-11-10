@@ -20,13 +20,13 @@ export interface InputMessageProps {
 }
 
 export const InputErrorMessage = ({ msg, align = "right" }: InputMessageProps) => (
-  <Message data-input-error-message="true" $align={align} $color="#C62828">
+  <Message data-input-error-message="true" $align={align} $color="var(--romni-red-text, #C62828)">
     {msg}
   </Message>
 );
 
 export const InputSuccessMessage = ({ msg, align = "right" }: InputMessageProps) => (
-  <Message $align={align} $color="#3A57E8">
+  <Message $align={align} $color="var(--romni-blue-text, #3A57E8)">
     {msg}
   </Message>
 );

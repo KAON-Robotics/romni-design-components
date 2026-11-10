@@ -6,9 +6,9 @@ const sizes = {
     large: { height: "50px", radius: "8px", padding: "0 40px", fontSize: "16px" },
 };
 const colors = {
-    primary: { background: "#1E1F23", color: "#FFF", border: "#1E1F23" },
-    secondary: { background: "#F8F8F9", color: "#3F4A5D", border: "#EBEBEB" },
-    neutral: { background: "#F5F5F5", color: "#3F4A5D", border: "#EBEBEB" },
+    primary: { background: "var(--romni-surface-raised, #1E1F23)", color: "var(--romni-on-solid, #FFF)", border: "var(--romni-border, #1E1F23)" },
+    secondary: { background: "var(--romni-surface-subtle, #F8F8F9)", color: "var(--romni-text-muted, #3F4A5D)", border: "var(--romni-border, #EBEBEB)" },
+    neutral: { background: "var(--romni-surface-subtle, #F5F5F5)", color: "var(--romni-text-muted, #3F4A5D)", border: "var(--romni-border, #EBEBEB)" },
 };
 const StyledButton = styled("button", {
     shouldForwardProp: (prop) => !["$variant", "$size", "$iconOnly"].includes(String(prop)),
@@ -16,10 +16,10 @@ const StyledButton = styled("button", {
     const size = sizes[$size];
     const color = colors[$variant];
     const hoverBackground = $variant === "primary"
-        ? $size === "large" ? "#3A57E8" : "#3F4A5D"
+        ? $size === "large" ? "var(--romni-blue-solid, #3A57E8)" : "var(--romni-button-hover, #3F4A5D)"
         : $variant === "secondary"
-            ? $size === "large" ? "#B8BFCC" : "#F0F0F0"
-            : "#EBEBEB";
+            ? $size === "large" ? "var(--romni-button-hover, #B8BFCC)" : "var(--romni-surface-raised, #F0F0F0)"
+            : "var(--romni-surface-raised, #EBEBEB)";
     return {
         display: "inline-flex",
         width: $iconOnly ? size.height : "auto",
@@ -43,13 +43,13 @@ const StyledButton = styled("button", {
             backgroundColor: hoverBackground,
         },
         "&:focus-visible": {
-            outline: "2px solid #3A57E8",
+            outline: "2px solid var(--romni-blue-text, #3A57E8)",
             outlineOffset: "2px",
         },
         "&:disabled": {
-            borderColor: "#EBEBEB",
-            backgroundColor: "#EBEBEB",
-            color: $variant === "primary" ? "#FFF" : "#B8BFCC",
+            borderColor: "var(--romni-border, #EBEBEB)",
+            backgroundColor: "var(--romni-surface-subtle, #EBEBEB)",
+            color: $variant === "primary" ? "var(--romni-text-subtle, #FFF)" : "var(--romni-text-subtle, #B8BFCC)",
             cursor: "default",
         },
         "& > svg, & > img": { flexShrink: 0 },
@@ -62,8 +62,8 @@ const InputStyledButton = styled(Button)({
 });
 const DeleteStyledButton = styled(Button)({
     padding: "0 8px",
-    backgroundColor: "#F0F0F0",
-    color: "#596270",
+    backgroundColor: "var(--romni-surface-subtle, #F0F0F0)",
+    color: "var(--romni-text-muted, #596270)",
     fontSize: "13px",
     fontWeight: 500,
 });

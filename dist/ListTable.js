@@ -12,24 +12,24 @@ const Container = styled("div", {
     width: "100%",
     minHeight: $empty ? "560px" : undefined,
     padding: "12px 0 52px",
-    border: "1px solid #EBEBEB",
+    border: "1px solid var(--romni-border, #EBEBEB)",
     borderRadius: "12px",
-    background: "#FFF",
+    background: "var(--romni-surface, #FFF)",
 }));
 const ScrollContainer = styled("div")({
     height: "100%",
     overflowX: "auto",
-    borderBottom: "1px solid #E0E0E0",
+    borderBottom: "1px solid var(--romni-border, #E0E0E0)",
     "&::-webkit-scrollbar": { height: "8px" },
     "&::-webkit-scrollbar-track": {
-        border: "1px solid #EDEEF4",
+        border: "1px solid var(--romni-border, #EDEEF4)",
         borderRadius: "999px",
-        backgroundColor: "#F8F8F9",
+        backgroundColor: "var(--romni-surface-subtle, #F8F8F9)",
     },
     "&::-webkit-scrollbar-thumb": {
-        border: "2px solid #F8F8F9",
+        border: "2px solid var(--romni-border, #F8F8F9)",
         borderRadius: "999px",
-        backgroundColor: "#B8BFCC",
+        backgroundColor: "var(--romni-border-strong, #B8BFCC)",
     },
 });
 const Table = styled("table")({
@@ -40,8 +40,8 @@ const Table = styled("table")({
 const Head = styled("thead", {
     shouldForwardProp: (prop) => prop !== "$sticky",
 })(({ $sticky }) => ({
-    borderBottom: "1px solid #E0E0E0",
-    background: "#FFF",
+    borderBottom: "1px solid var(--romni-border, #E0E0E0)",
+    background: "var(--romni-surface, #FFF)",
     fontWeight: 600,
     ...($sticky && { position: "sticky", top: 0, zIndex: 2 }),
 }));
@@ -49,7 +49,7 @@ const HeaderCell = styled("th")({
     position: "relative",
     height: "44px",
     paddingLeft: "16px",
-    color: "#596270",
+    color: "var(--romni-text-muted, #596270)",
     fontSize: "12px",
     fontWeight: 600,
     textAlign: "left",
@@ -63,11 +63,11 @@ const HeaderCell = styled("th")({
         borderRadius: "4px",
         cursor: "pointer",
     },
-    ".header-content.active": { color: "#2A2C33" },
-    ".header-content:hover": { backgroundColor: "#F0F0F0" },
+    ".header-content.active": { color: "var(--romni-text, #2A2C33)" },
+    ".header-content:hover": { backgroundColor: "var(--romni-surface-subtle, #F0F0F0)" },
     ".header-content .desc": { transform: "rotate(180deg)" },
 });
-const SortIcon = ({ direction }) => direction ? (_jsxs("svg", { className: direction, width: "12", height: "12", viewBox: "0 0 12 12", fill: "none", "aria-hidden": "true", children: [_jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M6 11.25A5.25 5.25 0 1 0 6 .75a5.25 5.25 0 0 0 0 10.5Zm0-.9a4.35 4.35 0 1 0 0-8.7 4.35 4.35 0 0 0 0 8.7Z", fill: "#1E1F23" }), _jsx("path", { d: "M5.68 7.3V3.5h.64v3.8l1.73-1.67.45.44L6 8.5 3.5 6.07l.45-.44L5.68 7.3Z", fill: "#1E1F23", stroke: "#1E1F23", strokeWidth: ".3" })] })) : (_jsx("svg", { width: "10", height: "10", viewBox: "0 0 10 10", fill: "none", "aria-hidden": "true", children: _jsx("path", { d: "M7.5 3.75 5 1.25l-2.5 2.5h5Zm0 2.5L5 8.75l-2.5-2.5h5Z", fill: "#D3D7E0" }) }));
+const SortIcon = ({ direction }) => direction ? (_jsxs("svg", { className: direction, width: "12", height: "12", viewBox: "0 0 12 12", fill: "none", "aria-hidden": "true", children: [_jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M6 11.25A5.25 5.25 0 1 0 6 .75a5.25 5.25 0 0 0 0 10.5Zm0-.9a4.35 4.35 0 1 0 0-8.7 4.35 4.35 0 0 0 0 8.7Z", fill: "var(--romni-text, #1E1F23)" }), _jsx("path", { d: "M5.68 7.3V3.5h.64v3.8l1.73-1.67.45.44L6 8.5 3.5 6.07l.45-.44L5.68 7.3Z", fill: "var(--romni-text, #1E1F23)", stroke: "var(--romni-text, #1E1F23)", strokeWidth: ".3" })] })) : (_jsx("svg", { width: "10", height: "10", viewBox: "0 0 10 10", fill: "none", "aria-hidden": "true", children: _jsx("path", { d: "M7.5 3.75 5 1.25l-2.5 2.5h5Zm0 2.5L5 8.75l-2.5-2.5h5Z", fill: "var(--romni-text-subtle, #D3D7E0)" }) }));
 const Row = styled("tr", {
     shouldForwardProp: (prop) => !["$clickable", "$disableHover", "$backgroundHover"].includes(String(prop)),
 })(({ $clickable, $disableHover, $backgroundHover }) => ({
@@ -75,7 +75,7 @@ const Row = styled("tr", {
     cursor: $clickable ? "pointer" : "default",
     ...(!$disableHover && {
         "&:hover": $backgroundHover
-            ? { backgroundColor: "#EBF1FF" }
+            ? { backgroundColor: "var(--romni-blue-bg, #EBF1FF)" }
             : {
                 borderRadius: "4px",
                 boxShadow: "0px 4px 10px 0px rgba(58, 87, 232, 0.20), inset 0 0 0 1px #3A57E8",
@@ -85,21 +85,21 @@ const Row = styled("tr", {
 const Cell = styled("td")({
     height: "50px",
     padding: "8px 20px",
-    borderBottom: "1px solid #F5F5F5",
-    color: "#3F4A5D",
+    borderBottom: "1px solid var(--romni-border, #F5F5F5)",
+    color: "var(--romni-text-muted, #3F4A5D)",
     fontSize: "12px",
     fontWeight: 400,
     verticalAlign: "middle",
     cursor: "default",
-    ".cell-secondary-line": { color: "#596270" },
+    ".cell-secondary-line": { color: "var(--romni-text-muted, #596270)" },
     "&.clickable": { cursor: "pointer" },
     "&.row-clickable-cell": { cursor: "pointer" },
     "&.multi-clickable": {
-        color: "#3F4A5D",
+        color: "var(--romni-text-muted, #3F4A5D)",
         cursor: "pointer",
         textDecoration: "underline",
-        textDecorationColor: "#3F4A5D",
-        "&:hover": { color: "#3A57E8", textDecorationColor: "#3A57E8" },
+        textDecorationColor: "var(--romni-text-muted, #3F4A5D)",
+        "&:hover": { color: "var(--romni-blue-text, #3A57E8)", textDecorationColor: "var(--romni-blue-text, #3A57E8)" },
     },
 });
 const Empty = styled("div")({

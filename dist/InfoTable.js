@@ -3,9 +3,9 @@ import { styled } from "@mui/material";
 import { HelpTooltip } from "./HelpTooltip.js";
 const Table = styled("div")({
     padding: "25px 40px 0",
-    border: "1px solid #EBEBEB",
+    border: "1px solid var(--romni-border, #EBEBEB)",
     borderRadius: "12px",
-    backgroundColor: "#FFF",
+    backgroundColor: "var(--romni-surface, #FFF)",
     transition: "height 0.3s",
 });
 const Row = styled("div", {
@@ -14,7 +14,7 @@ const Row = styled("div", {
     display: "flex",
     alignItems: "center",
     padding: "20px 0",
-    borderBottom: "1px solid #EBEBEB",
+    borderBottom: "1px solid var(--romni-border, #EBEBEB)",
     "&:last-of-type": { borderBottom: 0 },
     ".table-label": {
         display: "flex",
@@ -30,12 +30,12 @@ const Row = styled("div", {
             alignItems: "center",
             fontSize: "16px",
             fontWeight: 600,
-            span: { marginLeft: "4px", color: "#FF4747" },
+            span: { marginLeft: "4px", color: "var(--romni-red-text, #FF4747)" },
         },
-        "& > span": { color: "#596270", fontSize: "13px", fontWeight: 600 },
+        "& > span": { color: "var(--romni-text-muted, #596270)", fontSize: "13px", fontWeight: 600 },
     },
     ".table-value": {
-        ...($narrow && { paddingLeft: "20px", borderLeft: "1px dashed #EBEBEB" }),
+        ...($narrow && { paddingLeft: "20px", borderLeft: "1px dashed var(--romni-border, #EBEBEB)" }),
         display: "flex",
         minWidth: 0,
         flex: 1,

@@ -4,7 +4,7 @@ const Root = styled("div")({
     display: "flex",
     alignItems: "center",
     gap: "4px",
-    color: "#000",
+    color: "var(--romni-text, #000)",
     fontWeight: 700,
     lineHeight: "48px",
 });

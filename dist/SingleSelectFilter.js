@@ -10,15 +10,16 @@ const Button = styled("button", {
     height: "34px",
     padding: "8px 10px",
     alignItems: "center",
-    border: `1px solid ${$opened ? "#3A57E8" : "#EBEBEB"}`,
+    border: `1px solid ${$opened ? "var(--romni-blue-text, #3A57E8)" : "var(--romni-control-border, #EBEBEB)"}`,
     borderRadius: "4px",
-    backgroundColor: $bottomLayer ? "#FFF" : $opened ? "#EBF1FF" : "#F5F5F5",
+    backgroundColor: $bottomLayer ? "var(--romni-surface, #FFF)" : $opened ? "var(--romni-blue-bg, #EBF1FF)" : "var(--romni-surface, #F5F5F5)",
+    "&:hover": { backgroundColor: $opened ? "var(--romni-blue-bg, #EBF1FF)" : "var(--romni-surface-raised, #F5F5F5)" },
     fontSize: "13px",
     whiteSpace: "nowrap",
-    ".label": { color: $opened ? "#3A57E8" : "#596270", fontWeight: 500, flexShrink: 0 },
+    ".label": { color: $opened ? "var(--romni-blue-text, #3A57E8)" : "var(--romni-text-muted, #596270)", fontWeight: 500, flexShrink: 0 },
     ".selected": {
         marginLeft: "8px",
-        color: $opened ? "#173CBA" : "#2A2C33",
+        color: $opened ? "var(--romni-blue-text, #173CBA)" : "var(--romni-text, #2A2C33)",
         fontWeight: 600,
         flexShrink: 0,
     },
@@ -36,9 +37,9 @@ const Menu = styled("ul", {
     padding: "4px",
     flexDirection: "column",
     gap: "4px",
-    border: "1px solid #D3D7E0",
+    border: "1px solid var(--romni-border, #D3D7E0)",
     borderRadius: "8px",
-    backgroundColor: "#FFF",
+    backgroundColor: "var(--romni-surface, #FFF)",
     boxShadow: "0px 0px 20px 0px rgba(0, 0, 0, 0.20)",
     "--floating-menu-offset": $bottomLayer ? "4px" : "-2px",
     "--floating-menu-rest": "0px",
@@ -61,23 +62,23 @@ const Item = styled("li", {
     lineHeight: "24px",
     letterSpacing: "0.24px",
     whiteSpace: "nowrap",
-    "&.selected": { backgroundColor: "#EBF1FF" },
-    "&:hover": { backgroundColor: "#F5F5F5" },
+    "&.selected": { backgroundColor: "var(--romni-blue-bg, #EBF1FF)" },
+    "&:hover": { backgroundColor: "var(--romni-surface-subtle, #F5F5F5)" },
     ...($active !== undefined && {
         "&::before": {
             display: "block",
             width: "6px",
             height: "6px",
             borderRadius: "50%",
-            backgroundColor: $active ? "#15A46E" : "#FF4747",
+            backgroundColor: $active ? "var(--romni-green-text, #15A46E)" : "var(--romni-red-text, #FF4747)",
             content: "''",
         },
     }),
 }));
 const Arrow = ({ opened }) => (_jsx("svg", { width: "14", height: "14", viewBox: "0 0 14 14", fill: "none", "aria-hidden": "true", children: _jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: opened
             ? "M2.8 8.166 7 4.2l4.2 3.966-.988.933L7 6.066 3.788 9.1 2.8 8.166Z"
-            : "M11.2 5.833 7 9.8 2.8 5.833l.988-.933L7 7.933 10.212 4.9l.988.933Z", fill: opened ? "#3A57E8" : "#7C8694" }) }));
-const Check = () => (_jsx("svg", { viewBox: "0 0 14 14", width: "14", height: "14", fill: "none", "aria-hidden": "true", style: { position: "absolute", top: "50%", right: 10, transform: "translateY(-50%)" }, children: _jsx("path", { d: "m2.8 7.2 2.6 2.6 5.8-5.8", stroke: "#3A57E8", strokeWidth: "1.5", fill: "none" }) }));
+            : "M11.2 5.833 7 9.8 2.8 5.833l.988-.933L7 7.933 10.212 4.9l.988.933Z", fill: opened ? "var(--romni-blue-text, #3A57E8)" : "var(--romni-icon, #7C8694)" }) }));
+const Check = () => (_jsx("svg", { viewBox: "0 0 14 14", width: "14", height: "14", fill: "none", "aria-hidden": "true", style: { position: "absolute", top: "50%", right: 10, transform: "translateY(-50%)" }, children: _jsx("path", { d: "m2.8 7.2 2.6 2.6 5.8-5.8", stroke: "var(--romni-blue-text, #3A57E8)", strokeWidth: "1.5", fill: "none" }) }));
 export const SingleSelectFilter = ({ label, labelImage, openLabelImage, options, selected, onSelect, bottomLayer = false, showSelectedIcon = true, centerOptionText = false, }) => {
     const rootRef = useRef(null);
     const [opened, setOpened] = useState(false);

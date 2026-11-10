@@ -18,15 +18,15 @@ const Count = styled("span")({
   display: "flex",
   gap: "8px",
   fontFamily: "Manrope, sans-serif",
-  ".current": { color: "#3A57E8", fontWeight: 600 },
-  ".separator": { color: "#1E1F23", fontWeight: 400 },
-  ".total": { color: "#1E1F23", fontWeight: 600 },
+  ".current": { color: "var(--romni-blue-text, #3A57E8)", fontWeight: 600 },
+  ".separator": { color: "var(--romni-text, #1E1F23)", fontWeight: 400 },
+  ".total": { color: "var(--romni-text, #1E1F23)", fontWeight: 600 },
 });
 
 const Range = styled("span")({
   position: "absolute",
   right: "20px",
-  color: "#596270",
+  color: "var(--romni-text-muted, #596270)",
   fontSize: "13px",
   fontWeight: 500,
   letterSpacing: "0.26px",
@@ -42,10 +42,10 @@ const PageButton = styled("button")({
   border: 0,
   borderRadius: "8px",
   background: "transparent",
-  color: "#7C8694",
+  color: "var(--romni-icon, #7C8694)",
   cursor: "pointer",
-  "&:hover:not(:disabled)": { color: "#3A57E8" },
-  "&:disabled": { color: "#D3D7E0", cursor: "default" },
+  "&:hover:not(:disabled)": { color: "var(--romni-blue-text, #3A57E8)" },
+  "&:disabled": { color: "var(--romni-text-subtle, #D3D7E0)", cursor: "default" },
 });
 
 const PaginationIcon = ({ direction, double = false }: { direction: "left" | "right"; double?: boolean }) => (

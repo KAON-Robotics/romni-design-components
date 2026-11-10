@@ -32,7 +32,7 @@ export const TableLoadingOverlay = () => (
         value={85}
         size={36}
         thickness={4.8}
-        sx={{ color: "#3A57E8" }}
+        sx={{ color: "var(--romni-blue-text, #3A57E8)" }}
       />
     </Spinner>
   </Overlay>

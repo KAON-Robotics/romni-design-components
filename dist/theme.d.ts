@@ -1,0 +1,53 @@
+import type { PropsWithChildren } from "react";
+export declare const romniDarkTokens: {
+    readonly "--romni-page": "#121212";
+    readonly "--romni-surface": "#1c1c1c";
+    readonly "--romni-surface-subtle": "#262626";
+    readonly "--romni-surface-raised": "#323232";
+    readonly "--romni-surface-glass": "rgba(28,28,28,.95)";
+    readonly "--romni-help-bg": "#323232";
+    readonly "--romni-button-hover": "#505050";
+    readonly "--romni-tooltip-bg": "#ededed";
+    readonly "--romni-tooltip-text": "#1c1c1c";
+    readonly "--romni-text": "#ededed";
+    readonly "--romni-text-muted": "#c2c2c2";
+    readonly "--romni-text-subtle": "#b0b0b0";
+    readonly "--romni-icon": "#d0d0d0";
+    readonly "--romni-control-border": "#858585";
+    readonly "--romni-control-mark": "#ededed";
+    readonly "--romni-on-solid": "#ffffff";
+    readonly "--romni-border": "#525252";
+    readonly "--romni-border-strong": "#909090";
+    readonly "--romni-blue-text": "#829cf5";
+    readonly "--romni-blue-bg": "#202b45";
+    readonly "--romni-blue-solid": "#3a57e8";
+    readonly "--romni-red-text": "#ff9aa3";
+    readonly "--romni-red-bg": "#3a222a";
+    readonly "--romni-red-solid": "#b42336";
+    readonly "--romni-orange-text": "#ffb987";
+    readonly "--romni-orange-bg": "#3d2c20";
+    readonly "--romni-orange-solid": "#9c4214";
+    readonly "--romni-yellow-text": "#ffd07e";
+    readonly "--romni-yellow-bg": "#3b311e";
+    readonly "--romni-yellow-solid": "#805600";
+    readonly "--romni-green-text": "#83dfb6";
+    readonly "--romni-green-bg": "#18372d";
+    readonly "--romni-green-solid": "#176b49";
+    readonly "--romni-cyan-text": "#85d9ee";
+    readonly "--romni-cyan-bg": "#18343f";
+    readonly "--romni-cyan-solid": "#096579";
+    readonly "--romni-purple-text": "#c8adff";
+    readonly "--romni-purple-bg": "#342744";
+    readonly "--romni-purple-solid": "#7440a3";
+    readonly "--romni-pink-text": "#ff9cdb";
+    readonly "--romni-pink-bg": "#3b2438";
+    readonly "--romni-pink-solid": "#9d286b";
+    readonly "--romni-scrim": "rgba(0,0,0,.65)";
+};
+export declare const romniLightTheme: import("@mui/material").Theme;
+export declare const romniDarkTheme: import("@mui/material").Theme;
+/** One document-wide provider also themes menus and tooltips rendered in portals. */
+export declare const RomniThemeProvider: ({ mode, children }: PropsWithChildren<{
+    mode: "light" | "dark";
+}>) => import("react").JSX.Element;
+//# sourceMappingURL=theme.d.ts.map

@@ -24,7 +24,7 @@ const Popup = styled("div", {
     backgroundColor: "rgba(42, 44, 51, 0.8)",
     boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
     backdropFilter: "blur(2px)",
-    color: "#FFFFFF",
+    color: "var(--romni-on-solid, #FFFFFF)",
     fontFamily: "Pretendard, sans-serif",
     fontSize: "14px",
     fontWeight: 500,

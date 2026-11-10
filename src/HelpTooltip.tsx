@@ -34,8 +34,9 @@ const Box = styled("div", {
   flexFlow: "column",
   gap: "6px",
   borderRadius: "6px",
-  backgroundColor: "#1E1F23",
-  color: "#FFF",
+  backgroundColor: "var(--romni-tooltip-bg, #1E1F23)",
+  color: "var(--romni-tooltip-text, #FFF)",
+  boxShadow: "0 4px 16px rgba(0,0,0,.3)",
   whiteSpace: "normal",
   ...(!$dashboard && { transform: "translateY(-50%)" }),
   strong: {
@@ -63,7 +64,7 @@ const Box = styled("div", {
         width: "3px",
         height: "3px",
         borderRadius: "50%",
-        backgroundColor: "#FFF",
+        backgroundColor: "var(--romni-tooltip-text, #FFF)",
         content: "''",
       },
     },
@@ -81,7 +82,7 @@ const Box = styled("div", {
       "&:first-of-type": {
         paddingBottom: "8px",
         marginBottom: "8px",
-        borderBottom: "1px solid #2A2C33",
+        borderBottom: "1px solid var(--romni-border-strong, #2A2C33)",
       },
       "*": { width: "40px" },
     },
@@ -92,13 +93,13 @@ const Box = styled("div", {
     ...(!$dashboard && { top: "50%", transform: "translateY(-50%)" }),
     borderWidth: "5px",
     borderStyle: "solid",
-    borderColor: "transparent #1E1F23 transparent transparent",
+    borderColor: "transparent var(--romni-tooltip-bg, #1E1F23) transparent transparent",
     content: "''",
   },
   "&.left-placement::after": {
     right: "-9px",
     left: "auto",
-    borderColor: "transparent transparent transparent #1E1F23",
+    borderColor: "transparent transparent transparent var(--romni-tooltip-bg, #1E1F23)",
   },
   "&.enter": {
     opacity: 1,
@@ -144,13 +145,13 @@ const Box = styled("div", {
 
 const InfoIcon = ({ dashboard }: { dashboard: boolean }) => dashboard ? (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-    <path d="M10.75 8.374v6h-1.5v-6h1.5ZM9.25 5.624v1.5h1.5v-1.5h-1.5Z" fill="#B8BFCC" />
-    <path fillRule="evenodd" clipRule="evenodd" d="M10 1.248a8.751 8.751 0 1 0 0 17.502 8.751 8.751 0 0 0 0-17.502Zm0 1.5a7.251 7.251 0 1 0 0 14.502 7.251 7.251 0 0 0 0-14.502Z" fill="#B8BFCC" />
+    <path d="M10.75 8.374v6h-1.5v-6h1.5ZM9.25 5.624v1.5h1.5v-1.5h-1.5Z" fill="var(--romni-icon, #B8BFCC)" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M10 1.248a8.751 8.751 0 1 0 0 17.502 8.751 8.751 0 0 0 0-17.502Zm0 1.5a7.251 7.251 0 1 0 0 14.502 7.251 7.251 0 0 0 0-14.502Z" fill="var(--romni-icon, #B8BFCC)" />
   </svg>
 ) : (
   <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
-    <path d="M7.525 5.862v4.2h-1.05v-4.2h1.05ZM6.475 3.937v1.05h1.05v-1.05h-1.05Z" fill="#7C8694" />
-    <path fillRule="evenodd" clipRule="evenodd" d="M7 .874A6.126 6.126 0 1 0 7 13.125 6.126 6.126 0 0 0 7 .874Zm0 1.05a5.076 5.076 0 1 0 0 10.151A5.076 5.076 0 0 0 7 1.924Z" fill="#7C8694" />
+    <path d="M7.525 5.862v4.2h-1.05v-4.2h1.05ZM6.475 3.937v1.05h1.05v-1.05h-1.05Z" fill="var(--romni-icon, #7C8694)" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M7 .874A6.126 6.126 0 1 0 7 13.125 6.126 6.126 0 0 0 7 .874Zm0 1.05a5.076 5.076 0 1 0 0 10.151A5.076 5.076 0 0 0 7 1.924Z" fill="var(--romni-icon, #7C8694)" />
   </svg>
 );
 

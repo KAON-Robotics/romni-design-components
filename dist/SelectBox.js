@@ -11,17 +11,18 @@ const Input = styled("input", {
     width: "100%",
     height: "50px",
     padding: $hasIcon ? "0 36px 0 52px" : "0 36px 0 16px",
-    border: `1px solid ${$opened ? "#3A57E8" : "#F0F0F0"}`,
+    border: `1px solid ${$opened ? "var(--romni-blue-text, #3A57E8)" : "var(--romni-control-border, #F0F0F0)"}`,
     borderRadius: "8px",
     outline: 0,
-    backgroundColor: "#FFF",
-    color: "#2A2C33",
+    backgroundColor: "var(--romni-surface, #FFF)",
+    color: "var(--romni-text, #2A2C33)",
     cursor: "pointer",
     fontSize: "14px",
     fontWeight: 600,
-    "&::placeholder": { color: "#B8BFCC" },
-    '&[aria-invalid="true"]': { borderColor: "#FF4747" },
-    "&:disabled": { backgroundColor: "#FAFAFA", color: "#7C8694" },
+    "&::placeholder": { color: "var(--romni-text-subtle, #B8BFCC)" },
+    "&:focus:not([aria-invalid='true'])": { borderColor: "var(--romni-blue-text, #3A57E8)" },
+    '&[aria-invalid="true"]': { borderColor: "var(--romni-red-text, #FF4747)" },
+    "&:disabled": { backgroundColor: "var(--romni-surface-subtle, #FAFAFA)", color: "var(--romni-text-muted, #7C8694)" },
 }));
 const Menu = styled("ul")({
     position: "absolute",
@@ -33,9 +34,9 @@ const Menu = styled("ul")({
     maxHeight: "200px",
     padding: "4px",
     overflowY: "auto",
-    border: "1px solid #EBEBEB",
+    border: "1px solid var(--romni-border, #EBEBEB)",
     borderRadius: "8px",
-    backgroundColor: "#FFF",
+    backgroundColor: "var(--romni-surface, #FFF)",
     boxShadow: "0px 4px 20px 0px rgba(0, 0, 0, 0.06)",
     "--floating-menu-offset": "6px",
     "--floating-menu-rest": "6px",
@@ -51,12 +52,12 @@ const Option = styled("li", {
     padding: "0 36px 0 20px",
     alignItems: "center",
     borderRadius: "4px",
-    backgroundColor: $selected ? "#EBF1FF" : "transparent",
+    backgroundColor: $selected ? "var(--romni-blue-bg, #EBF1FF)" : "transparent",
     cursor: "pointer",
     fontSize: "12px",
     fontWeight: 500,
     "&:not(:last-child)": { marginBottom: "4px" },
-    "&:hover": { backgroundColor: "#FAFAFA" },
+    "&:hover": { backgroundColor: "var(--romni-surface-subtle, #FAFAFA)" },
 }));
 const Icon = styled("span")({
     position: "absolute",
@@ -92,21 +93,21 @@ const Clear = styled("button")({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "50%",
-    backgroundColor: "#FFF",
+    backgroundColor: "var(--romni-surface, #FFF)",
     transform: "translateY(-50%)",
     "&::before, &::after": {
         position: "absolute",
         width: "10px",
         height: "2px",
-        backgroundColor: "#B8BFCC",
+        backgroundColor: "var(--romni-icon, #B8BFCC)",
         content: "''",
     },
     "&::before": { transform: "rotate(45deg)" },
     "&::after": { transform: "rotate(-45deg)" },
 });
-const Highlight = styled("span")({ color: "#3A57E8" });
-const Chevron = ({ opened }) => (_jsx("svg", { viewBox: "0 0 16 16", width: "16", height: "16", fill: "none", "aria-hidden": "true", children: _jsx("path", { d: opened ? "m3.2 9.333 4.8-4 4.8 4" : "m12.8 6.667-4.8 4-4.8-4", stroke: "#7C8694", strokeWidth: "1.4", strokeLinecap: "round", strokeLinejoin: "round" }) }));
-const SelectedCheck = () => (_jsx("svg", { viewBox: "0 0 16 16", width: "16", height: "16", fill: "none", "aria-hidden": "true", style: { position: "absolute", top: "50%", right: 15, transform: "translateY(-50%)" }, children: _jsx("path", { d: "m3.2 8.1 3 3 6.6-6.2", stroke: "#3A57E8", strokeWidth: "1.6" }) }));
+const Highlight = styled("span")({ color: "var(--romni-blue-text, #3A57E8)" });
+const Chevron = ({ opened }) => (_jsx("svg", { viewBox: "0 0 16 16", width: "16", height: "16", fill: "none", "aria-hidden": "true", children: _jsx("path", { d: opened ? "m3.2 9.333 4.8-4 4.8 4" : "m12.8 6.667-4.8 4-4.8-4", stroke: "var(--romni-icon, #7C8694)", strokeWidth: "1.4", strokeLinecap: "round", strokeLinejoin: "round" }) }));
+const SelectedCheck = () => (_jsx("svg", { viewBox: "0 0 16 16", width: "16", height: "16", fill: "none", "aria-hidden": "true", style: { position: "absolute", top: "50%", right: 15, transform: "translateY(-50%)" }, children: _jsx("path", { d: "m3.2 8.1 3 3 6.6-6.2", stroke: "var(--romni-blue-text, #3A57E8)", strokeWidth: "1.6" }) }));
 export const SelectBox = ({ options, placeholder, value, isValid, readOnly, disabled, contact, floatingMenu, startIcon, emptyOptionText = "No options", onChange, onClear, ...props }) => {
     var _a, _b;
     const rootRef = useRef(null);

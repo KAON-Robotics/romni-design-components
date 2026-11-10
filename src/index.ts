@@ -1,4 +1,5 @@
 export { Button, DeleteRowButton, InputButton } from "./Button.js";
+export { RomniThemeProvider, romniDarkTheme, romniLightTheme, romniDarkTokens } from "./theme.js";
 export type { ButtonProps, ButtonSize, ButtonVariant, DeleteRowButtonProps, InputButtonProps } from "./Button.js";
 export { DashboardCount } from "./DashboardCount.js";
 export type { DashboardCountProps } from "./DashboardCount.js";

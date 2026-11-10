@@ -11,19 +11,20 @@ const Button = styled("button", {
     height: $board ? "26px" : "34px",
     padding: $board ? "4px 6px" : "8px 10px",
     alignItems: "center",
-    border: `1px solid ${$opened ? "#3A57E8" : "#EBEBEB"}`,
+    border: `1px solid ${$opened ? "var(--romni-blue-text, #3A57E8)" : "var(--romni-control-border, #EBEBEB)"}`,
     borderRadius: "4px",
-    backgroundColor: $opened ? "#EBF1FF" : "#F5F5F5",
+    backgroundColor: $opened ? "var(--romni-blue-bg, #EBF1FF)" : "var(--romni-surface, #F5F5F5)",
+    "&:hover": { backgroundColor: $opened ? "var(--romni-blue-bg, #EBF1FF)" : "var(--romni-surface-raised, #F5F5F5)" },
     fontSize: $board ? "11px" : "13px",
     whiteSpace: "nowrap",
     ".label": {
-        color: $opened ? "#3A57E8" : "#596270",
+        color: $opened ? "var(--romni-blue-text, #3A57E8)" : "var(--romni-text-muted, #596270)",
         fontWeight: 500,
         flexShrink: 0,
     },
     ".selected": {
         marginLeft: "8px",
-        color: $opened ? "#173CBA" : "#2A2C33",
+        color: $opened ? "var(--romni-blue-text, #173CBA)" : "var(--romni-text, #2A2C33)",
         fontWeight: 600,
         flexShrink: 0,
     },
@@ -38,9 +39,9 @@ const Menu = styled("ul")({
     padding: "10px 14px",
     flexDirection: "column",
     gap: "10px",
-    border: "1px solid #D3D7E0",
+    border: "1px solid var(--romni-border, #D3D7E0)",
     borderRadius: "8px",
-    backgroundColor: "#FFF",
+    backgroundColor: "var(--romni-surface, #FFF)",
     boxShadow: "0px 0px 20px 0px rgba(0, 0, 0, 0.20)",
     "--floating-menu-offset": "-2px",
     "--floating-menu-rest": "0px",
@@ -52,7 +53,7 @@ const Check = styled(InputCheckbox)({
     width: "100%",
     flexDirection: "row-reverse",
     justifyContent: "space-between",
-    color: "#3F4A5D",
+    color: "var(--romni-text-muted, #3F4A5D)",
     fontSize: "12px",
     fontWeight: 500,
     whiteSpace: "nowrap",
@@ -65,7 +66,7 @@ const Check = styled(InputCheckbox)({
 });
 const Arrow = ({ opened }) => (_jsx("svg", { width: "14", height: "14", viewBox: "0 0 14 14", fill: "none", "aria-hidden": "true", children: _jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: opened
             ? "M2.8 8.166 7 4.2l4.2 3.966-.988.933L7 6.066 3.788 9.1 2.8 8.166Z"
-            : "M11.2 5.833 7 9.8 2.8 5.833l.988-.933L7 7.933 10.212 4.9l.988.933Z", fill: opened ? "#3A57E8" : "#7C8694" }) }));
+            : "M11.2 5.833 7 9.8 2.8 5.833l.988-.933L7 7.933 10.212 4.9l.988.933Z", fill: opened ? "var(--romni-blue-text, #3A57E8)" : "var(--romni-icon, #7C8694)" }) }));
 export const MultiSelectFilter = ({ filter, initialSelected, board = false, onChange, }) => {
     const rootRef = useRef(null);
     const [opened, setOpened] = useState(false);

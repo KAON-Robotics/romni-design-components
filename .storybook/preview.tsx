@@ -1,27 +1,22 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { RomniThemeProvider } from "../src/theme";
 import type { Preview } from "@storybook/react-vite";
 import "./preview.css";
 
-const theme = createTheme({
-  palette: {
-    primary: { main: "#173CBA", light: "#3A57E8" },
-    background: { default: "#F5F5F5", paper: "#FFFFFF" },
-  },
-  typography: {
-    fontFamily: '"Manrope", "Pretendard Variable", Pretendard, sans-serif',
-  },
-});
-
 const preview: Preview = {
   tags: ["autodocs"],
+  initialGlobals: { theme: "light" },
+  globalTypes: {
+    theme: { description: "화면 테마", toolbar: { icon: "circlehollow", dynamicTitle: true, items: [
+      { value: "light", title: "라이트" }, { value: "dark", title: "다크" },
+    ] } },
+  },
   decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+    (Story, context) => (
+      <RomniThemeProvider mode={context.globals.theme === "dark" ? "dark" : "light"}>
         <div style={{ width: "100%", padding: 24 }}>
           <Story />
         </div>
-      </ThemeProvider>
+      </RomniThemeProvider>
     ),
   ],
   parameters: {

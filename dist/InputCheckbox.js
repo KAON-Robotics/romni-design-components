@@ -5,16 +5,16 @@ const Label = styled("label")({
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    color: "#3F4A5D",
+    color: "var(--romni-text-muted, #3F4A5D)",
     cursor: "pointer",
     fontSize: "16px",
     fontWeight: 500,
     "&.disabled": {
-        color: "#7C8694",
+        color: "var(--romni-text-subtle, #7C8694)",
         cursor: "default",
     },
     "&:hover .input-checkbox:not(.disabled):not(.checked)": {
-        backgroundColor: "#D4E4FF",
+        backgroundColor: "var(--romni-blue-bg, #D4E4FF)",
     },
 });
 const Check = styled("div", {
@@ -27,11 +27,12 @@ const Check = styled("div", {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "4px",
-    backgroundColor: $checked ? ($disabled ? "#7C8694" : "#3A57E8") : "#F0F0F0",
+    backgroundColor: $checked ? ($disabled ? "var(--romni-surface-raised, #7C8694)" : "var(--romni-blue-solid, #3A57E8)") : "var(--romni-surface-subtle, #F0F0F0)",
+    boxShadow: "inset 0 0 0 1px var(--romni-control-border, transparent)",
     transition: "background-color 0.15s ease",
     "&::before, &::after": {
         position: "absolute",
-        backgroundColor: "white",
+        backgroundColor: $checked ? "var(--romni-control-mark, white)" : "var(--romni-surface-subtle, white)",
         content: "''",
     },
     "&::before": {
